@@ -1,4 +1,5 @@
 const { User } = require("../../models");
+const { checkInputs } = require("../../services/user");
 const { LogError, LogSuccess } = require("../../services/console");
 
 exports.getAllUsers = async (req, res) => {
@@ -38,16 +39,45 @@ exports.register = async (req, res) => {
   try {
     const { firstname, lastname, email, password } = req.body;
 
+    if (!firstname || !lastname || !email || !password) {
+      LogError("authentication : Champs manquants");
+      return res.status(400).json({ error: "Champs manquants" });
+    }
+
     const emailAlreadyTaken = await checkIfEmailAlreadyTaken(email, res);
     if (emailAlreadyTaken) {
       LogError("authentication : Email déjà utilisé");
       return res.status(409).json({ error: "Email déjà utilisé" });
     }
 
-    const newUser = await User.create({ firstname, lastname, email, password });
+    const inputsValid = checkInputs(firstname, lastname, email, password);
+    if (inputsValid !== true) {
+      LogError(
+        "authentication : Erreur dans les données d'inscription :",
+        inputsValid.error
+      );
+      return res
+        .status(400)
+        .json({ code: inputsValid.code, error: inputsValid.error });
+    }
+
+    const newUser = await User.create({
+      firstname,
+      lastname,
+      email,
+      password,
+    });
+
+    const userData = {
+      id: newUser.id,
+      firstname: newUser.firstname,
+      lastname: newUser.lastname,
+      email: newUser.email,
+      role: newUser.role,
+    };
 
     LogSuccess("authentication : Utilisateur enregistré avec succès", newUser);
-    res.status(201).json(newUser);
+    res.status(201).json(userData);
   } catch (error) {
     LogError(
       "authentication : Erreur lors de l'enregistrement de l'utilisateur",
@@ -74,9 +104,17 @@ exports.login = async (req, res) => {
     }
     LogSuccess("authentication : Connexion réussie");
 
+    const userData = {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      role: user.role,
+    };
+
     const token = user.generateAuthToken();
     res.cookie("sessionToken", token, { httpOnly: false, secure: false });
-    res.status(200).json({ message: "Connexion réussie" });
+    res.status(200).json({ message: "Connexion réussie", user: userData });
   } catch (error) {
     LogError("authentication : Erreur lors de la connexion", error);
     res.status(500).json({ error: "Erreur lors de la connexion" });

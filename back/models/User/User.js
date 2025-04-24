@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { LogError } = require("../../services/console");
 
 const User = sequelize.define("User", {
   id: {
@@ -27,6 +28,11 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  role: {
+    type: DataTypes.ENUM("administrator", "trainer", "user", "guest"),
+    allowNull: false,
+    defaultValue: "user",
+  },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -49,7 +55,7 @@ User.prototype.isValidPassword = async function (password) {
 
 User.prototype.generateAuthToken = function () {
   const token = jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
   return token;
 };
