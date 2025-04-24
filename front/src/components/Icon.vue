@@ -10,19 +10,20 @@ const { name } = defineProps(['name'])
 const iconHTML = computed(() => icons.find((icon) => icon.name === name)?.[name])
 </script>
 
-<style>
+<style scoped>
 .icon {
-  aspect-ratio: 1/1;
-  transition: fill 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  svg {
-    flex-shrink: 0;
-  }
+  width: 24px;
+  height: 24px;
+  stroke: #d9d9d9; /* Couleur par défaut des icônes */
+  fill: none; /* Assurez-vous que l'intérieur des icônes est transparent */
+  transition: stroke 0.3s ease;
 }
 
-.icon-hover:hover .icon {
-  fill: url(#like-gradient);
+.icon svg {
+  width: 100%;
+  height: 100%;
 }
 </style>
