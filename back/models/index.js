@@ -2,7 +2,7 @@ const sequelize = require("../config/database");
 const { DataTypes } = require("sequelize");
 
 // Importer les définitions de modèles
-const User = require("./User");
+const User = require("./User/User");
 const Course = require("./Course");
 const Chapter = require("./Chapter");
 const Lesson = require("./Lesson");
