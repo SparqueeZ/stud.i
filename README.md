@@ -145,4 +145,4 @@ L'API back-end est organisée comme suit :
 - `services/` - Services métier
 - `utils/` - Fonctions utilitaires
 
-## Ce projet est réalisé dans le cadre de notre formation de bachelor 3 à l'ESAIP (projet applicatif).
+## Ce projet est réalisé dans le cadre de notre projet applicatif lors de la formation de bachelor 3 à l'ESAIP.
