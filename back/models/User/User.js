@@ -33,6 +33,10 @@ const User = sequelize.define("User", {
     allowNull: false,
     defaultValue: "user",
   },
+  resetTokenUsed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -58,6 +62,15 @@ User.prototype.generateAuthToken = function () {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
   return token;
+};
+
+User.prototype.generateResetToken = async function () {
+  this.resetTokenUsed = false; // Reset the token usage flag
+  await this.save();
+  const resetToken = jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_RESET_EXPIRES_IN,
+  });
+  return resetToken;
 };
 
 module.exports = User;
