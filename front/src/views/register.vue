@@ -94,7 +94,7 @@
         </div>
         <button class="register-button" type="button">Inscription</button>
         <p class="login-link">
-          Vous avez déjà un compte ? <a href="#">Connectez-vous.</a>
+          Vous avez déjà un compte ? <a href="#" @click.prevent="$router.push('/login')">Connectez-vous.</a>
         </p>
       </div>
     </div>
@@ -164,7 +164,7 @@ function toggleConfirmPassword() {
 .register-box {
   width: 100%;
   max-width: 700px; 
-  padding: 80px 60px;
+  padding: 60px 60px;
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
