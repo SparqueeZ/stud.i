@@ -54,7 +54,7 @@
 import { ref } from 'vue'
 import background from '@/assets/img/authentification_background.jpg'
 import Icon from '@/components/Icon.vue'
-import Input from '@/components/Input.vue'
+import Input from '@/components/Input.vue' // Import du composant Input
 
 const email = ref('')
 const password = ref('')
