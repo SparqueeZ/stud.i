@@ -3,6 +3,9 @@ const cors = require("cors");
 // Import models through the index.js file instead of database directly
 const { sequelize } = require("./models");
 const cookieParser = require("cookie-parser");
+// Swagger imports
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const courseRoutes = require("./routes/courses/course.routes");
 const chapterRoutes = require("./routes/courses/chapter.routes");
 const lessonRoutes = require("./routes/courses/lesson.routes");
@@ -13,6 +16,28 @@ const userRoutes = require("./routes/user/user.routes");
 const authRoutes = require("./routes/auth/auth.routes");
 
 const app = express();
+
+// Swagger configuration
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Stud.i API Documentation",
+      version: "1.0.0",
+      description: "Documentation des routes API de la plateforme Stud.i",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+        description: "Serveur de développement",
+      },
+    ],
+  },
+  apis: ["./routes/**/*.js"], // Chemin vers les fichiers de routes
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const corsOptions = {
   origin: "http://localhost",
@@ -42,13 +67,13 @@ app.use("/api/admin", adminRoutes);
 sequelize
   .sync({ alter: false, logging: false, force: false })
   .then(() => {
-    console.log("Connexion à la base de données réussie.");
+    console.log("[SUCCESS] Connexion à la base de données réussie.");
     app.listen(3000, () => {
       console.log("Serveur démarré sur le port 3000");
     });
   })
   .catch((error) => {
-    console.error("Erreur de connexion à la base de données:", error);
+    console.error("[ERROR] Erreur de connexion à la base de données:", error);
     // Additional detailed error logging
     if (error.parent) {
       console.error("SQL Error:", error.parent.sqlMessage);

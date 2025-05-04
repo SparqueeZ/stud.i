@@ -1,50 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const chapterController = require("../../controllers/courses/chapter.controller");
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     Chapter:
- *       type: object
- *       required:
- *         - title
- *         - courseId
- *       properties:
- *         id:
- *           type: string
- *           format: uuid
- *           description: Identifiant unique du chapitre
- *         title:
- *           type: string
- *           description: Titre du chapitre
- *         open:
- *           type: boolean
- *           description: Indique si le chapitre est ouvert par défaut
- *           default: false
- *         courseId:
- *           type: string
- *           format: uuid
- *           description: Identifiant du cours parent
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- *       example:
- *         id: 123e4567-e89b-12d3-a456-426614174002
- *         title: Variables et Types
- *         open: true
- *         courseId: 123e4567-e89b-12d3-a456-426614174001
- */
-
 /**
  * @swagger
  * tags:
  *   name: Chapters
- *   description: API de gestion des chapitres de cours
+ *   description: API de gestion des chapitres
  */
 
 /**
@@ -64,11 +22,7 @@ const chapterController = require("../../controllers/courses/chapter.controller"
  *                 $ref: '#/components/schemas/Chapter'
  *       500:
  *         description: Erreur serveur
- */
-router.get("/chapters", chapterController.getAllChapters);
-
-/**
- * @swagger
+ *
  * /api/courses/{courseId}/chapters:
  *   get:
  *     summary: Récupère tous les chapitres d'un cours
@@ -94,15 +48,6 @@ router.get("/chapters", chapterController.getAllChapters);
  *         description: Cours non trouvé
  *       500:
  *         description: Erreur serveur
- */
-router.get(
-  "/courses/:courseId/chapters",
-  chapterController.getAllChaptersByCourseId
-);
-
-/**
- * @swagger
- * /api/courses/{courseId}/chapters:
  *   post:
  *     summary: Crée un nouveau chapitre dans un cours
  *     tags: [Chapters]
@@ -141,11 +86,7 @@ router.get(
  *         description: Cours non trouvé
  *       500:
  *         description: Erreur serveur
- */
-router.post("/courses/:courseId/chapters", chapterController.createChapter);
-
-/**
- * @swagger
+ *
  * /api/courses/{courseId}/chapters/{id}:
  *   get:
  *     summary: Récupère un chapitre spécifique
@@ -176,12 +117,6 @@ router.post("/courses/:courseId/chapters", chapterController.createChapter);
  *         description: Cours ou chapitre non trouvé
  *       500:
  *         description: Erreur serveur
- */
-router.get("/courses/:courseId/chapters/:id", chapterController.getChapterById);
-
-/**
- * @swagger
- * /api/courses/{courseId}/chapters/{id}:
  *   put:
  *     summary: Met à jour un chapitre
  *     tags: [Chapters]
@@ -224,12 +159,6 @@ router.get("/courses/:courseId/chapters/:id", chapterController.getChapterById);
  *         description: Cours ou chapitre non trouvé
  *       500:
  *         description: Erreur serveur
- */
-router.put("/courses/:courseId/chapters/:id", chapterController.updateChapter);
-
-/**
- * @swagger
- * /api/courses/{courseId}/chapters/{id}:
  *   delete:
  *     summary: Supprime un chapitre
  *     tags: [Chapters]
@@ -256,9 +185,3 @@ router.put("/courses/:courseId/chapters/:id", chapterController.updateChapter);
  *       500:
  *         description: Erreur serveur
  */
-router.delete(
-  "/courses/:courseId/chapters/:id",
-  chapterController.deleteChapter
-);
-
-module.exports = router;

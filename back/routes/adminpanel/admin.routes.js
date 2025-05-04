@@ -9,6 +9,124 @@ const {
   Payment,
 } = require("../../models");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Dashboard:
+ *       type: object
+ *       properties:
+ *         userCount:
+ *           type: integer
+ *           description: Nombre total d'utilisateurs
+ *         courseCount:
+ *           type: integer
+ *           description: Nombre total de cours
+ *         recentOrders:
+ *           type: array
+ *           description: Liste des commandes récentes
+ *           items:
+ *             $ref: '#/components/schemas/Order'
+ *         totalRevenue:
+ *           type: number
+ *           description: Revenu total
+ *
+ *     Order:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *         userId:
+ *           type: string
+ *           format: uuid
+ *         courseId:
+ *           type: string
+ *           format: uuid
+ *         status:
+ *           type: string
+ *           enum: [pending, completed, cancelled]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *
+ *     Payment:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *         orderId:
+ *           type: string
+ *           format: uuid
+ *         amount:
+ *           type: number
+ *         status:
+ *           type: string
+ *           enum: [pending, completed, failed]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *
+ *     UserPublic:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *         firstname:
+ *           type: string
+ *         lastname:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         role:
+ *           type: string
+ *           enum: [administrator, trainer, user, guest]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *
+ *     Statistics:
+ *       type: object
+ *       properties:
+ *         sales:
+ *           type: object
+ *           properties:
+ *             daily:
+ *               type: integer
+ *             monthly:
+ *               type: integer
+ *             yearly:
+ *               type: integer
+ *         topCourses:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 format: uuid
+ *               title:
+ *                 type: string
+ *               orderCount:
+ *                 type: integer
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Admin
+ *   description: API d'administration
+ */
+
 // Middleware pour vérifier les droits d'administration (à implémenter)
 const checkAdminRights = (req, res, next) => {
   // Vérification de l'authentification et des droits admin
@@ -19,7 +137,28 @@ const checkAdminRights = (req, res, next) => {
 // Appliquer le middleware sur toutes les routes admin
 router.use(checkAdminRights);
 
-// === DASHBOARD ===
+/**
+ * @swagger
+ * /api/admin/dashboard:
+ *   get:
+ *     summary: Récupère les données du tableau de bord administrateur
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Données du tableau de bord
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Dashboard'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/dashboard", async (req, res) => {
   try {
     const userCount = await User.count();
@@ -46,8 +185,52 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
-// === GESTION DES UTILISATEURS ===
-// Liste des utilisateurs avec pagination
+/**
+ * @swagger
+ * /api/admin/users:
+ *   get:
+ *     summary: Récupère la liste paginée des utilisateurs
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Numéro de page
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Nombre d'éléments par page
+ *     responses:
+ *       200:
+ *         description: Liste paginée des utilisateurs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 total:
+ *                   type: integer
+ *                 pages:
+ *                   type: integer
+ *                 currentPage:
+ *                   type: integer
+ *                 users:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/UserPublic'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/users", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -74,7 +257,121 @@ router.get("/users", async (req, res) => {
   }
 });
 
-// Détail d'un utilisateur
+/**
+ * @swagger
+ * /api/admin/users/{id}:
+ *   get:
+ *     summary: Récupère les détails d'un utilisateur
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Détails de l'utilisateur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserPublic'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ *
+ *   put:
+ *     summary: Met à jour les informations d'un utilisateur
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstname:
+ *                 type: string
+ *               lastname:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               role:
+ *                 type: string
+ *                 enum: [administrator, trainer, user, guest]
+ *     responses:
+ *       200:
+ *         description: Utilisateur mis à jour avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 user:
+ *                   $ref: '#/components/schemas/UserPublic'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ *
+ *   delete:
+ *     summary: Supprime un utilisateur
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Utilisateur supprimé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/users/:id", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
@@ -93,8 +390,6 @@ router.get("/users/:id", async (req, res) => {
     });
   }
 });
-
-// Mettre à jour un utilisateur
 router.put("/users/:id", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -112,8 +407,6 @@ router.put("/users/:id", async (req, res) => {
     });
   }
 });
-
-// Supprimer un utilisateur
 router.delete("/users/:id", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -132,8 +425,37 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-// === GESTION DES COURS ===
-// Liste des cours avec statistiques de vente
+/**
+ * @swagger
+ * /api/admin/courses:
+ *   get:
+ *     summary: Récupère la liste des cours avec statistiques
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des cours avec statistiques de vente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 allOf:
+ *                   - $ref: '#/components/schemas/Course'
+ *                   - type: object
+ *                     properties:
+ *                       salesCount:
+ *                         type: integer
+ *                       revenue:
+ *                         type: number
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/courses", async (req, res) => {
   try {
     const courses = await Course.findAll({
@@ -169,7 +491,55 @@ router.get("/courses", async (req, res) => {
   }
 });
 
-// Mettre un cours en avant sur la page d'accueil
+/**
+ * @swagger
+ * /api/admin/courses/{id}/feature:
+ *   put:
+ *     summary: Met un cours en avant sur la page d'accueil
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         required: true
+ *         description: ID du cours
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - featured
+ *             properties:
+ *               featured:
+ *                 type: boolean
+ *                 description: Statut de mise en avant
+ *     responses:
+ *       200:
+ *         description: Statut de mise en avant mis à jour
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 course:
+ *                   $ref: '#/components/schemas/Course'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       404:
+ *         description: Cours non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.put("/courses/:id/feature", async (req, res) => {
   try {
     const course = await Course.findByPk(req.params.id);
@@ -188,8 +558,70 @@ router.put("/courses/:id/feature", async (req, res) => {
   }
 });
 
-// === GESTION DES VENTES ===
-// Liste des commandes avec pagination et filtres
+/**
+ * @swagger
+ * /api/admin/orders:
+ *   get:
+ *     summary: Récupère la liste des commandes avec pagination et filtres
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Numéro de page
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [pending, completed, cancelled]
+ *         description: Filtre par statut
+ *       - in: query
+ *         name: dateFrom
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Date de début (YYYY-MM-DD)
+ *       - in: query
+ *         name: dateTo
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Date de fin (YYYY-MM-DD)
+ *     responses:
+ *       200:
+ *         description: Liste paginée des commandes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 total:
+ *                   type: integer
+ *                 pages:
+ *                   type: integer
+ *                 currentPage:
+ *                   type: integer
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Order'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/orders", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -231,7 +663,28 @@ router.get("/orders", async (req, res) => {
   }
 });
 
-// === STATISTIQUES ===
+/**
+ * @swagger
+ * /api/admin/statistics:
+ *   get:
+ *     summary: Récupère les statistiques de vente
+ *     tags: [Admin]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Statistiques de vente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Statistics'
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
 router.get("/statistics", async (req, res) => {
   try {
     // Statistiques de vente par période

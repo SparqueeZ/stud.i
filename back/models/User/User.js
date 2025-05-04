@@ -4,6 +4,53 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { LogError } = require("../../services/console");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - firstname
+ *         - lastname
+ *         - email
+ *         - password
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: Identifiant unique de l'utilisateur
+ *         firstname:
+ *           type: string
+ *           description: Prénom de l'utilisateur
+ *         lastname:
+ *           type: string
+ *           description: Nom de famille de l'utilisateur
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Adresse email de l'utilisateur
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: Mot de passe hashé de l'utilisateur
+ *         role:
+ *           type: string
+ *           enum: [administrator, trainer, user, guest]
+ *           description: Rôle de l'utilisateur
+ *           default: user
+ *         resetTokenUsed:
+ *           type: boolean
+ *           description: Indique si le token de réinitialisation a été utilisé
+ *           default: false
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
 const User = sequelize.define("User", {
   id: {
     type: DataTypes.UUID,
@@ -33,6 +80,10 @@ const User = sequelize.define("User", {
     allowNull: false,
     defaultValue: "user",
   },
+  resetTokenUsed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -58,6 +109,15 @@ User.prototype.generateAuthToken = function () {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
   return token;
+};
+
+User.prototype.generateResetToken = async function () {
+  this.resetTokenUsed = false; // Reset the token usage flag
+  await this.save();
+  const resetToken = jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_RESET_EXPIRES_IN,
+  });
+  return resetToken;
 };
 
 module.exports = User;

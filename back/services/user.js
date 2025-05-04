@@ -34,6 +34,49 @@ const checkInputs = (firstname, lastname, email, password) => {
   return true;
 };
 
+const checkString = (str) => {
+  const textRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
+  if (!str) {
+    return { error: "Chaine de caractères manquante", code: 400 };
+  }
+  if (str.length < 2) {
+    return { error: "Chaine de caractères trop courte", code: 490 };
+  }
+  if (!textRegex.test(str)) {
+    return { error: "Chaine de caractères invalide", code: 491 };
+  }
+  return true;
+};
+
+const checkEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!email || !emailRegex.test(email)) {
+    return { error: "Format du mail invalide", code: 492 };
+  }
+  if (email.length < 5) {
+    return { error: "Email trop court", code: 493 };
+  }
+  if (email.length > 50) {
+    return { error: "Email trop long", code: 494 };
+  }
+  return true;
+};
+
+const checkPassword = (password) => {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+  if (!password || !passwordRegex.test(password)) {
+    return { error: "Mot de passe invalide", code: 495 };
+  }
+  if (password.length < 8) {
+    return { error: "Mot de passe trop court", code: 496 };
+  }
+  return true;
+};
+
 module.exports = {
   checkInputs,
+  checkString,
+  checkEmail,
+  checkPassword,
 };

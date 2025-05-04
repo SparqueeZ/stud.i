@@ -1,6 +1,43 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Document:
+ *       type: object
+ *       required:
+ *         - title
+ *         - type
+ *         - lessonId
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: Identifiant unique du document
+ *         title:
+ *           type: string
+ *           description: Titre du document
+ *         link:
+ *           type: string
+ *           description: Lien vers le document
+ *         type:
+ *           type: string
+ *           enum: [text, archive, video, audio, image]
+ *           description: Type de document
+ *         lessonId:
+ *           type: string
+ *           format: uuid
+ *           description: Identifiant de la leçon associée
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
 const Document = sequelize.define("Document", {
   id: {
     type: DataTypes.UUID,
