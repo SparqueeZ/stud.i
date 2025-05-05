@@ -17,8 +17,8 @@ import Header from '@/components/UserDashboard/Header.vue'
 .dashboard-wrapper {
   display: flex;
   background-color: var(--color-background);
-  padding: 10px;
-  max-height: 100svh;
+  padding: 10px 10px 10px 0;
+  max-height: calc(100svh - 20px);
   overflow: hidden;
   .sidebar-wrapper {
     max-width: 240px;

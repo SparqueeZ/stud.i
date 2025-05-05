@@ -104,11 +104,17 @@ const ressources = ref([
       display: flex;
       align-items: center;
       padding: 10px 0;
+      width: 100%;
+      justify-content: space-between;
+
       .ressource-item-wrapper {
         display: flex;
         align-items: center;
         gap: 16px;
-        width: 100%;
+        max-width: calc(100% - 170px); /* Reserve space for chapter wrapper */
+        flex: 1;
+        overflow: hidden;
+
         .ressource-icon-wrapper {
           display: flex;
           justify-content: center;
@@ -126,11 +132,16 @@ const ressources = ref([
         .ressource-infos-wrapper {
           display: flex;
           flex-direction: column;
+          width: calc(100% - 51px); /* Icon width + gap */
+          min-width: 0; /* This is critical for text-overflow to work */
+          flex: 1;
+
           .ressource-infos {
             font-size: 16px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
           }
           .course {
             font-size: 14px;
@@ -144,9 +155,11 @@ const ressources = ref([
       }
       .ressource-chapter-wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: flex-end;
         min-width: 170px;
+        flex-shrink: 0;
+
         .ressource-chapter {
           font-size: 12px;
           color: var(--color-text-secondary);
@@ -166,14 +179,27 @@ const ressources = ref([
       .ressource {
         flex-direction: column;
         align-items: flex-start;
+        gap: 4px;
 
         .ressource-item-wrapper {
           gap: 8px;
+          width: 100%;
+          max-width: 100%;
+
+          .ressource-infos-wrapper {
+            max-width: calc(100% - 43px); /* Adjusted for smaller gap */
+
+            .ressource-infos {
+              font-size: 14px; /* Smaller font size on mobile */
+            }
+          }
         }
 
         .ressource-chapter-wrapper {
           justify-content: flex-start;
           min-width: auto;
+          padding-left: 43px; /* Align with content */
+          width: 100%;
         }
       }
     }

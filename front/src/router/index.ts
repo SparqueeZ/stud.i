@@ -4,6 +4,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import Home from '@/views/UserDashboard/Home.vue'
 import Certificat from '@/views/UserDashboard/Certificat.vue'
+import Formation from '@/views/UserDashboard/Formation.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'accueil',
       component: Home,
+    },
+    {
+      path: '/formation',
+      name: 'formation',
+      component: Formation,
     },
     {
       path: '/certificat',

@@ -1,7 +1,5 @@
 <template>
-  <UserDashboard>
-    <h1>Certificats</h1>
-  </UserDashboard>
+  <UserDashboard> </UserDashboard>
 </template>
 
 <script setup lang="ts">

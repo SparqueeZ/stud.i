@@ -62,8 +62,11 @@ const courses = ref([
   .courses-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 16px;
+    gap: 8px;
+
     .course {
       display: flex;
       flex-direction: column;
@@ -101,13 +104,14 @@ const courses = ref([
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 280px;
+      flex: 1;
       min-height: 270px;
+      max-width: 280px;
       border: 1px solid var(--color-border);
       border-radius: 20px;
       p {
         font-size: 16px;
-        color: var(--color-text);
+        color: var(--color-text-secondary);
       }
     }
   }

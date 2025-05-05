@@ -1,7 +1,7 @@
 <template>
   <header class="header-wrapper">
     <div class="page-infos-wrapper">
-      <Icon name="home" />
+      <Icon :name="getPageIcon()" />
       <p class="page-infos">{{ pageName }}</p>
     </div>
     <div class="profile-wrapper">
@@ -19,11 +19,27 @@
 <script setup lang="ts">
 import Icon from '../Icon.vue'
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const route = useRoute()
-console.log(route.name)
-const pageName = ref(route.name)
+const pageName = computed(() => route.name)
+
+const getPageIcon = () => {
+  switch (route.name) {
+    case 'home':
+      return 'home'
+    case 'formation':
+      return 'book'
+    case 'certificat':
+      return 'hat'
+    case 'ressources':
+      return 'folder'
+    case 'ressource':
+      return 'file'
+    default:
+      return 'home'
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -33,6 +49,11 @@ const pageName = ref(route.name)
   justify-content: space-between;
   align-items: center;
   min-height: 99px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-background);
+  width: 100%;
 
   .page-infos-wrapper {
     display: flex;

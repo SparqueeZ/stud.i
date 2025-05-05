@@ -69,7 +69,7 @@ sequelize
   .then(() => {
     console.log("[SUCCESS] Connexion à la base de données réussie.");
     app.listen(3000, () => {
-      console.log("Serveur démarré sur le port 3000");
+      console.log("[SUCCESS] Serveur démarré sur le port 3000");
     });
   })
   .catch((error) => {

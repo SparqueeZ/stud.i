@@ -24,15 +24,19 @@ import UserDashboard from '@/layouts/UserDashboard.vue'
   padding: 32px;
   display: flex;
   margin-inline: auto;
+  width: 100%;
+  max-width: 1280px;
+  gap: 32px;
+  box-sizing: border-box;
 
   .left-collumn {
-    min-width: 700px;
+    width: 60%;
     display: flex;
     gap: 32px;
     flex-direction: column;
   }
   .right-collumn {
-    min-width: 40%;
+    width: 40%;
     display: flex;
     flex-direction: column;
   }
@@ -41,11 +45,10 @@ import UserDashboard from '@/layouts/UserDashboard.vue'
 @media (max-width: 1200px) {
   .content {
     flex-direction: column;
-    .left-collumn {
-      min-width: 100%;
-    }
+    .left-collumn,
     .right-collumn {
-      min-width: 100%;
+      width: 100%;
+      max-width: 100%;
     }
   }
 }
@@ -58,7 +61,8 @@ import UserDashboard from '@/layouts/UserDashboard.vue'
 
     .left-collumn,
     .right-collumn {
-      min-width: 100%;
+      width: 100%;
+      max-width: 100%;
     }
   }
 }
