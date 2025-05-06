@@ -8,10 +8,23 @@ const Chapter = require("./Chapter");
 const Lesson = require("./Lesson");
 const Document = require("./Document");
 const Content = require("./Content");
+const UserCourse = require("./UserCourse");
 
-// Définir les associations dans un ordre précis
-// Pour éviter les problèmes de dépendances circulaires
 const setupAssociations = () => {
+  // User-Course associations (many-to-many with explicit model)
+  User.belongsToMany(Course, {
+    through: UserCourse,
+    foreignKey: "userId",
+    otherKey: "courseId",
+    onDelete: "CASCADE",
+  });
+  Course.belongsToMany(User, {
+    through: UserCourse,
+    foreignKey: "courseId",
+    otherKey: "userId",
+    onDelete: "CASCADE",
+  });
+
   // Course-Chapter associations
   Course.hasMany(Chapter, {
     foreignKey: { name: "courseId", allowNull: false },
@@ -41,17 +54,15 @@ const setupAssociations = () => {
   Document.belongsTo(Lesson, { foreignKey: "lessonId" });
 };
 
-// Définir une fonction pour initialiser les modèles dans un ordre spécifique
 const initializeDatabase = async (options = {}) => {
   try {
-    // Créer les tables dans un ordre qui respecte les dépendances
     await User.sync(options);
     await Course.sync(options);
     await Chapter.sync(options);
     await Lesson.sync(options);
-    // Ces tables dépendent de Lesson, donc elles viennent après
     await Content.sync(options);
     await Document.sync(options);
+    await UserCourse.sync(options);
 
     console.log("Base de données initialisée avec succès");
     return true;
@@ -64,10 +75,8 @@ const initializeDatabase = async (options = {}) => {
   }
 };
 
-// Exécuter les associations
 setupAssociations();
 
-// Exporter tous les modèles et fonctions utiles
 module.exports = {
   sequelize,
   User,
@@ -76,5 +85,6 @@ module.exports = {
   Lesson,
   Document,
   Content,
+  UserCourse,
   initializeDatabase,
 };

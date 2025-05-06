@@ -84,6 +84,10 @@ const User = sequelize.define("User", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  lastConnectedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -118,6 +122,48 @@ User.prototype.generateResetToken = async function () {
     expiresIn: process.env.JWT_RESET_EXPIRES_IN,
   });
   return resetToken;
+};
+
+User.prototype.getCourses = async function () {
+  const Course = require("../Course");
+  const Chapter = require("../Chapter");
+  const Lesson = require("../Lesson");
+  // Récupère les cours avec Chapters et Lessons
+  const courses = await Course.findAll({
+    include: [
+      {
+        model: require("./User"),
+        where: { id: this.id },
+        attributes: [],
+        through: {
+          attributes: ["purchaseDate", "completionStatus", "completionRate"],
+        },
+      },
+      {
+        model: Chapter,
+        include: [
+          {
+            model: Lesson,
+          },
+        ],
+      },
+    ],
+  });
+
+  return courses.map((course) => {
+    const courseObj = course.toJSON();
+    if (courseObj.Chapters) {
+      courseObj.chapters = courseObj.Chapters.map((chapter) => {
+        if (chapter.Lessons) {
+          chapter.lessons = chapter.Lessons;
+          delete chapter.Lessons;
+        }
+        return chapter;
+      });
+      delete courseObj.Chapters;
+    }
+    return courseObj;
+  });
 };
 
 module.exports = User;

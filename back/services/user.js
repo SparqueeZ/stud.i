@@ -1,3 +1,5 @@
+const User = require("../models/User/User.js");
+
 const checkInputs = (firstname, lastname, email, password) => {
   // check if firstname and lastname are not empty/null and are strings without special characters and numbers
   const textRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
@@ -22,14 +24,14 @@ const checkInputs = (firstname, lastname, email, password) => {
     return { error: "Email trop long", code: 494 };
   }
 
-  const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!password || !passwordRegex.test(password)) {
-    return { error: "Mot de passe invalide", code: 495 };
-  }
-  if (password.length < 8) {
-    return { error: "Mot de passe trop court", code: 496 };
-  }
+  //   const passwordRegex =
+  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  //   if (!password || !passwordRegex.test(password)) {
+  //     return { error: "Mot de passe invalide", code: 495 };
+  //   }
+  //   if (password.length < 8) {
+  //     return { error: "Mot de passe trop court", code: 496 };
+  //   }
 
   return true;
 };
@@ -65,13 +67,32 @@ const checkEmail = (email) => {
 const checkPassword = (password) => {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-  if (!password || !passwordRegex.test(password)) {
-    return { error: "Mot de passe invalide", code: 495 };
-  }
-  if (password.length < 8) {
-    return { error: "Mot de passe trop court", code: 496 };
-  }
+  //   if (!password || !passwordRegex.test(password)) {
+  //     return { error: "Mot de passe invalide", code: 495 };
+  //   }
+  //   if (password.length < 8) {
+  //     return { error: "Mot de passe trop court", code: 496 };
+  //   }
   return true;
+};
+
+const updateLastConnection = async (userId) => {
+  console.log("userId", userId);
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return { error: "Utilisateur non trouvé", code: 404 };
+    }
+    user.lastConnectedAt = new Date();
+    await user.save();
+    return true;
+  } catch (error) {
+    console.error("Erreur updateLastConnection :", error); // Log d'erreur détaillé
+    return {
+      error: "Erreur lors de la mise à jour de la dernière connexion",
+      code: 500,
+    };
+  }
 };
 
 module.exports = {
@@ -79,4 +100,5 @@ module.exports = {
   checkString,
   checkEmail,
   checkPassword,
+  updateLastConnection,
 };

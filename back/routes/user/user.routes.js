@@ -91,4 +91,6 @@ router.post("/users", authenticationController.createUser);
  */
 router.get("/user", authMiddleware, userController.getUserData);
 
+router.post("/user/add-course", userController.assignCourseToUser);
+
 module.exports = router;

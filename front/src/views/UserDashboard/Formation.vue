@@ -2,9 +2,14 @@
   <UserDashboard>
     <section class="content">
       <section class="course-img-wrapper">
-        <div class="cta-button-wrapper">
+        <div class="cta-button-wrapper" v-if="!userHasCourse">
           <div class="cta-button">
-            <p class="cta-button-text">{{ !userHasCourse ? 'Rejoindre le cours' : 'Continuer' }}</p>
+            <p class="cta-button-text">Rejoindre le cours</p>
+          </div>
+        </div>
+        <div class="cta-button-wrapper" v-else>
+          <div class="cta-button">
+            <p class="cta-button-text">Continuer</p>
           </div>
         </div>
       </section>
@@ -28,8 +33,8 @@
           <section class="trainer-infos">
             <p class="trainer-name">Romain P.</p>
             <p class="trainer-description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. J’adore
-              Parlons cyber c’est fou co...
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. J'adore
+              Parlons cyber c'est fou co...
             </p>
           </section>
         </article>

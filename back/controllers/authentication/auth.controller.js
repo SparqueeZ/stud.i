@@ -3,6 +3,7 @@ const {
   checkInputs,
   checkEmail,
   checkPassword,
+  updateLastConnection,
 } = require("../../services/user");
 const { LogError, LogSuccess } = require("../../services/console");
 const jwt = require("jsonwebtoken");
@@ -116,6 +117,8 @@ exports.login = async (req, res) => {
     }
     LogSuccess("authentication : Connexion réussie");
 
+    updateLastConnection(user.id);
+
     const userData = {
       id: user.id,
       firstname: user.firstname,
@@ -124,9 +127,15 @@ exports.login = async (req, res) => {
       role: user.role,
     };
 
+    const userCourses = await user.getCourses();
+
     const token = user.generateAuthToken();
     res.cookie("sessionToken", token, { httpOnly: false, secure: false });
-    res.status(200).json({ message: "Connexion réussie", user: userData });
+    res.status(200).json({
+      message: "Connexion réussie",
+      user: userData,
+      courses: userCourses,
+    });
   } catch (error) {
     LogError("authentication : Erreur lors de la connexion", error);
     res.status(500).json({ error: "Erreur lors de la connexion" });
