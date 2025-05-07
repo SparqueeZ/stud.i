@@ -82,8 +82,7 @@
         </div>
         <button class="register-button" type="button">Inscription</button>
         <p class="login-link">
-          Vous avez déjà un compte ?
-          <a href="#" @click.prevent="$router.push('/login')">Connectez-vous.</a>
+          Vous avez déjà un compte ? <a href="#" @click.prevent="$router.push('/login')">Connectez-vous.</a>
         </p>
       </div>
     </div>

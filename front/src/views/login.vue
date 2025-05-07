@@ -40,13 +40,10 @@
             </div>
           </div>
         </div>
-        <a href="#" class="forgot" @click.prevent="$router.push('/password')"
-          >Mot de passe oublié ?</a
-        >
+        <a href="#" class="forgot" @click.prevent="$router.push('/password')">Mot de passe oublié ?</a>
         <button class="login-button" type="button">Connexion</button>
         <p class="signup-link">
-          Vous n'avez pas de compte ?
-          <a href="#" @click.prevent="$router.push('/register')">Inscrivez-vous.</a>
+          Vous n'avez pas de compte ? <a href="#" @click.prevent="$router.push('/register')">Inscrivez-vous.</a>
         </p>
       </div>
     </div>

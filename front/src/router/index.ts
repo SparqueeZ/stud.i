@@ -65,6 +65,22 @@ const router = createRouter({
       name: 'Utilisateurs',
       component: TrainerUsers,
     },
+    {
+      path: '/password',
+      name: 'password',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/password.vue'),
+    },
+    {
+      path: '/modifypassword',
+      name: 'modifypassword',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/modifypassword.vue'),
+    },
   ],
 })
 
