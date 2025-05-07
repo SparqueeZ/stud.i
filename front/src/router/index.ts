@@ -13,6 +13,8 @@ import Course from '@/views/TrainingDashboard/Course.vue'
 
 import ModifyPassword from '@/views/modifypassword.vue'
 import Password from '@/views/password.vue'
+import PageTest from '@/views/PageTest.vue'
+import AddVideo from '@/views/AddVideo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +75,16 @@ const router = createRouter({
       path: '/password',
       name: 'password',
       component: Password,
+    },
+    {
+      path: '/page-test',
+      name: 'PageTest',
+      component: PageTest,
+    },
+    {
+      path: '/add-video',
+      name: 'AddVideo',
+      component: AddVideo,
     },
   ],
 })
