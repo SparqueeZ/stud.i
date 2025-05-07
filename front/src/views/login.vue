@@ -75,7 +75,8 @@ function togglePassword() {
   font-family: 'Inter', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   background-color: #161618;
@@ -121,7 +122,7 @@ html, body {
 }
 
 .login-box h1 {
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-size: 2.8rem;
   font-weight: 700;
 }
@@ -139,7 +140,7 @@ html, body {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #D9D9D9;
+  color: #d9d9d9;
 }
 
 .input-container {
@@ -168,7 +169,7 @@ html, body {
   padding: 14px 16px;
   background: transparent;
   border: none;
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-size: 1rem;
 }
 
@@ -207,7 +208,7 @@ html, body {
 .login-button {
   width: 100%;
   padding: 14px;
-  background: #FCA311;
+  background: #fca311;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -230,7 +231,7 @@ html, body {
 }
 
 .signup-link a {
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-weight: 600;
   text-decoration: none;
 }

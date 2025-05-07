@@ -12,12 +12,7 @@
                 <Icon name="user" class="input-icon" />
               </div>
               <div class="text-box">
-                <input
-                  id="first-name"
-                  type="text"
-                  v-model="firstName"
-                  placeholder="Prénom"
-                />
+                <input id="first-name" type="text" v-model="firstName" placeholder="Prénom" />
               </div>
             </div>
           </div>
@@ -28,12 +23,7 @@
                 <Icon name="user" class="input-icon" />
               </div>
               <div class="text-box">
-                <input
-                  id="last-name"
-                  type="text"
-                  v-model="lastName"
-                  placeholder="Nom de famille"
-                />
+                <input id="last-name" type="text" v-model="lastName" placeholder="Nom de famille" />
               </div>
             </div>
           </div>
@@ -45,12 +35,7 @@
               <Icon name="mail" class="input-icon" />
             </div>
             <div class="text-box">
-              <input
-                id="email"
-                type="email"
-                v-model="email"
-                placeholder="Adresse mail"
-              />
+              <input id="email" type="email" v-model="email" placeholder="Adresse mail" />
             </div>
           </div>
         </div>
@@ -88,7 +73,10 @@
               />
             </div>
             <div class="eye-box" @click="toggleConfirmPassword">
-              <Icon :name="showConfirmPassword ? 'eyeclosed' : 'eyeopen'" class="toggle-password-icon" />
+              <Icon
+                :name="showConfirmPassword ? 'eyeclosed' : 'eyeopen'"
+                class="toggle-password-icon"
+              />
             </div>
           </div>
         </div>
@@ -163,7 +151,7 @@ function toggleConfirmPassword() {
 
 .register-box {
   width: 100%;
-  max-width: 700px; 
+  max-width: 700px;
   padding: 60px 60px;
   background-color: #161618;
   border: 3px solid #232325;
@@ -171,7 +159,7 @@ function toggleConfirmPassword() {
 }
 
 .register-box h1 {
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-size: 2.8rem;
   font-weight: 700;
 }
@@ -188,13 +176,13 @@ function toggleConfirmPassword() {
 
 .form-group-row {
   display: flex;
-  gap:90px;
+  gap: 90px;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #D9D9D9;
+  color: #d9d9d9;
 }
 
 .input-container {
@@ -223,7 +211,7 @@ function toggleConfirmPassword() {
   padding: 14px 16px;
   background: transparent;
   border: none;
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-size: 1rem;
 }
 
@@ -254,7 +242,7 @@ function toggleConfirmPassword() {
 .register-button {
   width: 100%;
   padding: 14px;
-  background: #FCA311;
+  background: #fca311;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -276,7 +264,7 @@ function toggleConfirmPassword() {
 }
 
 .login-link a {
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-weight: 600;
   text-decoration: none;
 }
