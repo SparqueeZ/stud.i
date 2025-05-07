@@ -1,5 +1,6 @@
 const { User } = require("../../models");
 const { LogError, LogSuccess } = require("../../services/console");
+const { Course, UserCourse } = require("../../models"); // Ajout de Course et UserCourse
 
 exports.getUserData = async (req, res) => {
   try {
@@ -84,5 +85,54 @@ exports.updateUser = async (req, res) => {
     res
       .status(500)
       .json({ error: "Erreur lors de la mise à jour de l'utilisateur" });
+  }
+};
+
+exports.assignCourseToUser = async (req, res) => {
+  try {
+    const { courseId, userId } = req.body;
+    console.log("userId", userId);
+    console.log("courseId", courseId);
+    if (!userId || !courseId) {
+      return res.status(400).json({ error: "userId et courseId sont requis" });
+    }
+
+    // Vérifier que l'utilisateur et la course existent
+    const user = await User.findByPk(userId);
+    const course = await Course.findByPk(courseId);
+    if (!user || !course) {
+      return res
+        .status(404)
+        .json({ error: "Utilisateur ou course non trouvé" });
+    }
+
+    // Créer l'association (ou la retrouver si elle existe déjà)
+    const [userCourse, created] = await UserCourse.findOrCreate({
+      where: { userId, courseId },
+      defaults: { userId, courseId },
+    });
+
+    if (!created) {
+      return res
+        .status(409)
+        .json({ error: "L'utilisateur a déjà cette course" });
+    }
+
+    LogSuccess("Course assignée à l'utilisateur avec succès", {
+      userId,
+      courseId,
+    });
+    res.status(201).json({
+      message: "Course assignée à l'utilisateur avec succès",
+      userCourse,
+    });
+  } catch (error) {
+    LogError(
+      "Erreur lors de l'attribution de la course à l'utilisateur",
+      error
+    );
+    res.status(500).json({
+      error: "Erreur lors de l'attribution de la course à l'utilisateur",
+    });
   }
 };
