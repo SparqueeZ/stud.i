@@ -11,6 +11,9 @@ import TrainerUsers from '@/views/TrainerDashboard/Users.vue'
 
 import Course from '@/views/TrainingDashboard/Course.vue'
 
+import ModifyPassword from '@/views/modifypassword.vue'
+import Password from '@/views/password.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -65,21 +68,11 @@ const router = createRouter({
       name: 'Utilisateurs',
       component: TrainerUsers,
     },
+    { path: '/modifypassword', name: 'ModifyPassword', component: ModifyPassword },
     {
       path: '/password',
       name: 'password',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/password.vue'),
-    },
-    {
-      path: '/modifypassword',
-      name: 'modifypassword',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/modifypassword.vue'),
+      component: Password,
     },
   ],
 })
