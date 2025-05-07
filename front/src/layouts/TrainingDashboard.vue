@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Sidebar from '@/components/UserDashboard/Sidebar.vue'
+import Sidebar from '@/components/TrainingDashboard/Sidebar.vue'
 import Header from '@/components/UserDashboard/Header.vue'
 </script>
 

@@ -8,9 +8,11 @@
           </div>
         </div>
         <div class="cta-button-wrapper" v-else>
-          <div class="cta-button">
-            <p class="cta-button-text">Continuer</p>
-          </div>
+          <router-link to="/formation/12">
+            <div class="cta-button">
+              <p class="cta-button-text">Continuer</p>
+            </div>
+          </router-link>
         </div>
       </section>
       <section class="course-title-wrapper">
@@ -48,6 +50,8 @@
 
 <script setup lang="ts">
 import UserDashboard from '@/layouts/UserDashboard.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const userHasCourse = ref(true)
 
