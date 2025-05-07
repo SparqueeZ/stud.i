@@ -17,7 +17,7 @@
           <li class="cta-nav-item-wrapper">
             <router-link to="/" class="cta-nav-link">
               <Icon name="home" />
-              <p v-if="isOpen" class="cta-nav-item">Accueil</p>
+              <p v-if="isOpen" class="cta-nav-item">Tableau de bord</p>
             </router-link>
           </li>
         </ul>

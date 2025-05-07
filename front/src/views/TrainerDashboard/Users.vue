@@ -1,5 +1,5 @@
 <template>
-  <TrainerDashboard>
+  <UserDashboard>
     <section class="content">
       <!-- Statistiques générales -->
       <div class="stats-cards">
@@ -67,11 +67,11 @@
         <div class="popup-test">Popup</div>
       </Popup>
     </section>
-  </TrainerDashboard>
+  </UserDashboard>
 </template>
 
 <script setup lang="ts">
-import TrainerDashboard from '@/layouts/TrainerDashboard.vue'
+import UserDashboard from '@/layouts/UserDashboard.vue'
 import Popup from '@/components/Popup.vue'
 import { ref, computed } from 'vue'
 

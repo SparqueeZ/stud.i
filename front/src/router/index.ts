@@ -9,6 +9,8 @@ import Formation from '@/views/UserDashboard/Formation.vue'
 import TrainerHome from '@/views/TrainerDashboard/Home.vue'
 import TrainerUsers from '@/views/TrainerDashboard/Users.vue'
 
+import Course from '@/views/TrainingDashboard/Course.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -20,7 +22,18 @@ const router = createRouter({
     {
       path: '/formation',
       name: 'formation',
-      component: Formation,
+      children: [
+        {
+          path: '',
+          name: 'formation-list',
+          component: Formation,
+        },
+        {
+          path: ':id',
+          name: 'formation-detail',
+          component: Course,
+        },
+      ],
     },
     {
       path: '/certificat',

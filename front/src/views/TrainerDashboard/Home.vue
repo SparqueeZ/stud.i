@@ -1,11 +1,11 @@
 <template>
-  <TrainerDashboard>
+  <UserDashboard>
     <section class="content"></section>
-  </TrainerDashboard>
+  </UserDashboard>
 </template>
 
 <script setup lang="ts">
-import TrainerDashboard from '@/layouts/TrainerDashboard.vue'
+import UserDashboard from '@/layouts/UserDashboard.vue'
 </script>
 
 <style scoped></style>
