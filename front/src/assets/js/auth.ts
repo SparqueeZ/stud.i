@@ -7,15 +7,9 @@ type Product = {
   visible: boolean
   authorId: string
 }
-type Role = 'admin' | 'trainer' | 'user' | 'guest'
 
-type User = {
-  id: string
-  firstname: string
-  lastname: string
-  email: string
-  role: Role
-}
+import type { Course } from '@/utils/types/course'
+import type { User, Role } from '@/utils/types/user'
 
 type PermissionCheck<Key extends keyof Permissions> =
   | boolean
@@ -38,11 +32,19 @@ type Permissions = {
     dataType: User
     action: 'view' | 'update' | 'delete' | 'create'
   }
+  courses: {
+    dataType: Course
+    action: 'view' | 'update' | 'delete' | 'create'
+  }
+  administration: {
+    dataType: null
+    action: 'view'
+  }
 }
 
 const ROLES = {
-  admin: {
-    products: {
+  administrator: {
+    courses: {
       view: true,
       update: true,
       delete: true,
@@ -53,10 +55,13 @@ const ROLES = {
       update: true,
       delete: true,
       create: true,
+    },
+    administration: {
+      view: true,
     },
   },
   trainer: {
-    products: {
+    courses: {
       view: true,
       update: true,
       delete: true,
@@ -68,13 +73,16 @@ const ROLES = {
       delete: true,
       create: false,
     },
+    administration: {
+      view: false,
+    },
   },
   user: {
-    products: {
-      view: true,
-      update: (user, product) => user.id === product.authorId,
-      delete: (user, product) => user.id === product.authorId,
-      create: true,
+    courses: {
+      view: false,
+      update: false,
+      delete: false,
+      create: false,
     },
     users: {
       view: false,
@@ -84,7 +92,7 @@ const ROLES = {
     },
   },
   guest: {
-    products: {
+    courses: {
       view: false,
       update: false,
       delete: false,
@@ -101,12 +109,12 @@ const ROLES = {
 
 export function hasPermission<Resource extends keyof Permissions>(
   user: User,
-  resouce: Resource,
+  resource: Resource,
   action: Permissions[Resource]['action'],
   data?: Permissions[Resource]['dataType'],
 ) {
   if (!user.role) return false
-  const permission = (ROLES as RolesWithPermissions)[user.role][resouce]?.[action]
+  const permission = (ROLES as RolesWithPermissions)[user.role][resource]?.[action]
   if (permission == null) return false
 
   if (typeof permission === 'boolean') return permission

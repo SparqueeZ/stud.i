@@ -33,7 +33,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user in users" :key="user.id">
+              <tr
+                v-for="user in users"
+                :key="user.id"
+                @click="openPopup(user)"
+                style="cursor: pointer"
+              >
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.email }}</td>
@@ -58,15 +63,18 @@
           </table>
         </div>
       </div>
+      <Popup v-model="popupOpen">
+        <div class="popup-test">Popup</div>
+      </Popup>
     </section>
   </TrainerDashboard>
 </template>
 
 <script setup lang="ts">
 import TrainerDashboard from '@/layouts/TrainerDashboard.vue'
+import Popup from '@/components/Popup.vue'
 import { ref, computed } from 'vue'
 
-// Données fictives utilisateurs
 const users = ref([
   {
     id: 1,
@@ -122,6 +130,14 @@ const users = ref([
 
 const activeUsers = computed(() => users.value.filter((u) => u.active).length)
 const boughtUsers = computed(() => users.value.filter((u) => u.bought).length)
+
+const popupOpen = ref(false)
+const selectedUser = ref<any>(null)
+
+function openPopup(user: any) {
+  selectedUser.value = user
+  popupOpen.value = true
+}
 </script>
 
 <style scoped lang="scss">
@@ -209,6 +225,14 @@ const boughtUsers = computed(() => users.value.filter((u) => u.bought).length)
       }
     }
   }
+}
+
+.popup-test {
+  width: 70%;
+  padding: 16px;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  text-align: center;
 }
 
 @media (max-width: 900px) {

@@ -31,15 +31,17 @@
             :class="n.position === 'bottom' ? 'nav-bottom' : 'nav-top'"
             :key="n.category"
           >
-            <p class="nav-category" v-if="isOpen">{{ n.category }}</p>
-            <ul class="nav-items-list">
-              <li v-for="item in n.items" :key="item.name" class="nav-item-wrapper">
-                <router-link :to="item.route" class="nav-link">
-                  <Icon :name="item.icon" />
-                  <p class="nav-item" v-if="isOpen">{{ item.name }}</p>
-                </router-link>
-              </li>
-            </ul>
+            <template v-if="(accessibleItems = n.items.filter((item) => item.access)).length > 0">
+              <p class="nav-category" v-if="isOpen && n.category">{{ n.category }}</p>
+              <ul class="nav-items-list">
+                <li v-for="item in accessibleItems" :key="item.name" class="nav-item-wrapper">
+                  <router-link :to="item.route" class="nav-link">
+                    <Icon :name="item.icon" />
+                    <p class="nav-item" v-if="isOpen">{{ item.name }}</p>
+                  </router-link>
+                </li>
+              </ul>
+            </template>
           </li>
         </ul>
       </nav>
@@ -51,7 +53,10 @@
 import { ref } from 'vue'
 import Icon from '@/components/Icon.vue'
 import { useSidebarStore } from '@/stores/sidebar'
+import { useUserStore } from '@/stores/user'
+import { hasPermission } from '@/assets/js/auth'
 const sidebarStore = useSidebarStore()
+const userStore = useUserStore()
 
 const isOpen = ref(sidebarStore.isOpen)
 const toggleSidebar = () => {
@@ -59,38 +64,78 @@ const toggleSidebar = () => {
   isOpen.value = sidebarStore.isOpen
 }
 
-const nav = ref([
+interface NavItem {
+  name: string
+  icon: string
+  route: string
+  access?: boolean
+}
+
+interface NavCategory {
+  category?: string
+  position?: string
+  access: boolean
+  items: NavItem[]
+}
+
+const nav = ref<Array<NavCategory>>([
   {
     category: 'Cours',
+    access: true,
     items: [
       {
         name: 'La formation',
         icon: 'book',
         route: '/formation',
+        access: true,
       },
       {
         name: 'Certificat',
         icon: 'hat',
         route: '/certificat',
+        access: true,
+      },
+    ],
+  },
+  {
+    category: 'Administration',
+    access: hasPermission(userStore.user, 'courses', 'update'),
+    items: [
+      {
+        name: 'Gérer la formation',
+        icon: 'settings',
+        route: '/trainer/formation',
+        access: hasPermission(userStore.user, 'courses', 'update'),
+      },
+      {
+        name: 'Gérer les utilisateurs',
+        icon: 'user',
+        route: '/trainer/utilisateurs',
+        access: hasPermission(userStore.user, 'users', 'view'),
       },
     ],
   },
   {
     position: 'bottom',
+    access: true,
     items: [
       {
         name: 'Support',
         icon: 'help',
         route: '/support',
+        access: true,
       },
       {
         name: 'Paramètres',
         icon: 'settings',
         route: '/parametres',
+        access: true,
       },
     ],
   },
 ])
+
+let accessibleItems: any[] = []
 </script>
 
 <style scoped lang="scss">
@@ -117,7 +162,7 @@ const nav = ref([
     position: absolute;
     top: 0;
     right: -15px;
-    z-index: 1001;
+    z-index: 101;
     .sidebar-button {
       display: flex;
       justify-content: center;
@@ -220,7 +265,8 @@ const nav = ref([
             }
             .cta-nav-item {
               transition: color 0.2s ease-out;
-              padding: 2px 0 0 0;
+              padding: 3px 0 0 0;
+              font-size: 0.9rem;
             }
           }
         }
@@ -244,6 +290,7 @@ const nav = ref([
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 32px;
         .nav-bottom {
           margin-top: auto;
         }
@@ -252,8 +299,11 @@ const nav = ref([
           flex-direction: column;
           gap: 8px;
           .nav-category {
-            padding: 0 20px;
+            padding: 0 4px;
             color: var(--color-text-tertiary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
           }
           .nav-items-list {
             list-style-type: none;
@@ -301,7 +351,8 @@ const nav = ref([
               }
               .nav-item {
                 transition: color 0.2s ease-out;
-                padding: 2px 0 0 0;
+                padding: 3px 0 0 0;
+                font-size: 0.9rem;
               }
             }
           }
