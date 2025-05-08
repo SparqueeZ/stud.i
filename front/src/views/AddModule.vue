@@ -1,20 +1,20 @@
 <template>
-  <div class="popup-container add-video-page">
+  <div class="popup-container add-module-page">
     <div class="popup-box">
       <div class="popup-header">
-        <Icon name="video" class="popup-icon" />
-        <h1>Importer une vidéo</h1>
+        <Icon name="module" class="popup-icon" />
+        <h1>Ajout d’un module</h1>
       </div>
       <hr class="separator" />
-      <div class="upload-area">
-        <div class="upload-circle">
-          <Icon name="import" class="upload-icon" />
-        </div>
-        <p class="upload-text">
-          Glissez-déposez les fichiers vidéo que vous souhaitez ajouter au module.
-        </p>
-        <button class="upload-button">Sélectionnez des fichiers</button>
+      <div class="form-section">
+        <p class="form-label">Titre du module</p>
+        <input type="text" class="input-box" placeholder="Saisissez le titre ici" />
       </div>
+      <div class="form-section">
+        <p class="form-label">Ajouter une description</p>
+        <textarea class="textarea-box" placeholder="Saisissez la description ici"></textarea>
+      </div>
+      <button class="submit-button">Ajouter le module</button>
       <div class="back-link" @click="$router.push('/')">
         <Icon name="back" class="back-icon" />
         <span>Retour au dashboard</span>
@@ -36,6 +36,7 @@ import Icon from '@/components/Icon.vue'
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  color: var(--color-text); /* S'assurer que la couleur de texte est appliquée */
 }
 
 .popup-box {
@@ -47,7 +48,7 @@ import Icon from '@/components/Icon.vue'
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .popup-header {
@@ -56,8 +57,8 @@ import Icon from '@/components/Icon.vue'
   margin-bottom: 20px;
 }
 
-.add-video-page .popup-icon {
-  stroke: var(--color-text);
+.add-module-page .popup-icon {
+  stroke: var(--color-text); /* Utilisation de la variable CSS pour la couleur */
   width: 24px;
   height: 24px;
   margin-right: 12px;
@@ -68,55 +69,62 @@ h1 {
   color: #d9d9d9;
   font-size: 1.5rem;
   font-weight: 700;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .separator {
   border: none;
   height: 2px;
   background-color: #232325;
-  margin: 20px 0;
+  margin: 20px 0 20px; /* Réduction de l'espace sous la bordure */
 }
 
-.upload-area {
-  text-align: center;
+.form-section {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.upload-circle {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 45px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.add-video-page .upload-icon {
-  stroke: var(--color-text-tertiary);
-  fill: none;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  transition: stroke 0.2s ease, scale 0.3s ease;
-}
-
-.add-video-page .upload-icon:hover {
-  stroke: #ffffff;
-}
-
-.upload-text {
+.form-label {
   color: #626164;
   font-size: 0.95rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.input-box {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #232325;
+  border-radius: 8px;
+  background-color: #161618;
+  color: #d9d9d9;
+  font-size: 0.95rem;
   font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
-.upload-button {
+.input-box::placeholder {
+  color: #626164;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+}
+
+.textarea-box {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 2px solid #232325;
+  border-radius: 8px;
+  background-color: #161618;
+  color: #d9d9d9;
+  font-size: 0.95rem;
+  resize: none;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  margin-bottom: 20px; /* Ajout d'espace sous la description */
+}
+
+.textarea-box::placeholder {
+  color: #626164;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+}
+
+.submit-button {
   padding: 14px;
   background: #fca311;
   border: none;
@@ -126,11 +134,11 @@ h1 {
   color: #161618;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 30px;
+  margin-bottom: 8px; /* Réduction de l'espace sous le bouton jaune */
   font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
-.upload-button:hover {
+.submit-button:hover {
   background-color: #b37400;
 }
 
@@ -150,19 +158,11 @@ h1 {
   color: #d9d9d9;
 }
 
-.add-video-page .back-icon {
+.add-module-page .back-icon {
   width: 20px;
   height: 20px;
   margin-right: 8px;
   stroke: #373639;
   fill: none;
-}
-
-.upload-icon svg,
-.popup-icon svg {
-  width: 100%;
-  height: 100%;
-  stroke: inherit;
-  fill: inherit;
 }
 </style>

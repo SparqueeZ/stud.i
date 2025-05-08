@@ -3,6 +3,7 @@
     <button @click="$router.push('/add-video')" class="test-button">Ouvrir la popup</button>
     <button @click="$router.push('/congrats')" class="test-button">Ouvrir Félicitations</button>
     <button @click="$router.push('/add-review')" class="test-button">Ouvrir Ajouter un avis</button>
+    <button @click="$router.push('/add-module')" class="test-button">Ouvrir Ajouter un module</button>
     <AddReview v-if="showAddReview" @close="showAddReview = false" />
   </div>
 </template>
@@ -21,6 +22,7 @@ const showAddReview = ref(false)
   align-items: center;
   height: 100vh;
   background-color: #f5f5f5;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .test-button {

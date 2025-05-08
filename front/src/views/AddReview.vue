@@ -58,6 +58,7 @@ const selectStar = (n) => {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
+  font-family: 'Poppins', sans-serif;
 }
 
 .popup-box {
@@ -80,10 +81,12 @@ const selectStar = (n) => {
 
 .add-review-page .popup-icon {
   stroke: var(--color-text);
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   margin-right: 12px;
   fill: none;
+  display: flex;
+  align-items: center;
 }
 
 h1 {
@@ -118,6 +121,7 @@ h1 {
   color: #ffffff;
   font-size: 1rem;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .stars {
@@ -150,14 +154,16 @@ h1 {
   font-size: 0.95rem;
   margin-bottom: 50px;
   resize: none;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .message-box::placeholder {
   color: #626164;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .submit-button {
-  padding: 14px;
+  padding: 14px 20px; /* Augmentation de la largeur en ajoutant du padding horizontal */
   background: #fca311;
   border: none;
   border-radius: 8px;
@@ -167,6 +173,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-bottom: 1px;
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .submit-button:hover {
