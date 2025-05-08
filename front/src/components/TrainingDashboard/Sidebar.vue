@@ -1,5 +1,6 @@
 <template>
   <aside class="sidebar-wrapper" :class="{ 'sidebar-wrapper--open': isOpen }">
+    <!-- BOUTON TOGGLE -->
     <div class="sidebar-button-wrapper">
       <div class="sidebar-button" @click="toggleSidebar">
         <Icon
@@ -8,9 +9,13 @@
         />
       </div>
     </div>
+
+    <!-- LOGO -->
     <section class="logo-wrapper">
       <p class="logo-text" v-if="isOpen">STUD.I</p>
     </section>
+
+    <!-- CTA NAV -->
     <section class="cta-nav-wrapper">
       <nav class="cta-nav">
         <ul class="cta-nav-list">
@@ -24,6 +29,7 @@
       </nav>
     </section>
 
+    <!-- PROGRESSION -->
     <section class="progression-wrapper">
       <div class="progression">
         <p class="course-title">L'art de l'OSINT</p>
@@ -34,6 +40,7 @@
       </div>
     </section>
 
+    <!-- NAVIGATION -->
     <section class="nav-wrapper">
       <nav class="nav">
         <ul class="nav-main-list">
@@ -43,16 +50,30 @@
             :key="n.chapterName"
           >
             <ul class="nav-items-list">
-              <li v-for="item in n.lessons" :key="item.name" class="nav-item-wrapper">
+              <li
+                v-for="(item, index) in n.lessons"
+                :key="item.name"
+                class="nav-item-wrapper"
+                :class="{
+                  completed: isLessonDisplayedCompleted(n.lessons, index),
+                  'in-progress':
+                    isLessonDisplayedCompleted(n.lessons, index) ||
+                    (n.lessons[index - 1] && isLessonDisplayedCompleted(n.lessons, index - 1)),
+                }"
+              >
                 <router-link :to="item.route" class="nav-link">
                   <div
                     class="selection-dot-wrapper"
                     :class="{ 'selection-dot-wrapper--active': $route.path === item.route }"
                   >
+                    <div class="selection-dot-outer"></div>
                     <div class="selection-dot"></div>
                   </div>
                   <p class="nav-item" v-if="isOpen">{{ item.name }}</p>
                 </router-link>
+                <div v-if="index !== n.lessons.length - 1" class="vertical-progress-bar">
+                  <div class="progress-bar" :class="getProgressBarClass(n.lessons, index)"></div>
+                </div>
               </li>
             </ul>
           </li>
@@ -66,7 +87,10 @@
 import { ref } from 'vue'
 import Icon from '@/components/Icon.vue'
 import { useSidebarStore } from '@/stores/sidebar'
+import { useRoute } from 'vue-router'
+
 const sidebarStore = useSidebarStore()
+const route = useRoute()
 
 const isOpen = ref(sidebarStore.isOpen)
 const toggleSidebar = () => {
@@ -80,13 +104,31 @@ const nav = ref([
     locked: false,
     position: 'top',
     lessons: [
-      { name: "L'OSINT c'est quoi ?", route: '/trainer/lesson1', icon: 'lesson' },
-      { name: 'Un exemple connu', route: '/trainer/lesson2', icon: 'lesson' },
-      { name: 'Les aspects légaux', route: '/trainer/lesson3', icon: 'lesson' },
-      { name: 'Prêt ?', route: '/trainer/lesson4', icon: 'lesson' },
+      { name: "L'OSINT c'est quoi ?", route: '/formation/12.1', icon: 'lesson', completed: true },
+      { name: 'Un exemple connu', route: '/formation/12.2', icon: 'lesson', completed: true },
+      { name: 'Les aspects légaux', route: '/formation/12.3', icon: 'lesson', completed: false },
+      { name: 'Prêt ?', route: '/formation/12.4', icon: 'lesson', completed: false },
     ],
   },
 ])
+
+setTimeout(() => {
+  nav.value[0].lessons[2].completed = true
+}, 5000)
+
+// Détermine si la leçon doit être affichée comme complétée selon la route active
+function isLessonDisplayedCompleted(lessons: any[], index: number) {
+  const currentRouteIndex = lessons.findIndex((l) => l.route === route.path)
+  return index <= currentRouteIndex
+}
+
+// Détermine si la barre de progression verticale doit être "completed" ou "in-progress"
+function getProgressBarClass(lessons: any[], index: number) {
+  const currentRouteIndex = lessons.findIndex((l) => l.route === route.path)
+  if (index < currentRouteIndex) return 'completed'
+  if (index === currentRouteIndex) return 'in-progress'
+  return ''
+}
 </script>
 
 <style scoped lang="scss">
@@ -202,8 +244,7 @@ const nav = ref([
               }
               cursor: pointer;
             }
-            &.router-link-active {
-              background-color: var(--color-selected);
+            &.router-link-exact-active {
               color: var(--color-text);
               .icon {
                 stroke: var(--color-text);
@@ -223,7 +264,6 @@ const nav = ref([
       }
     }
   }
-
   .progression-wrapper {
     display: flex;
     justify-content: center;
@@ -268,9 +308,11 @@ const nav = ref([
     padding-top: 16px;
     padding-bottom: 16px;
     height: calc(100% - 192px);
+
     .nav {
       height: 100%;
       width: 100%;
+
       .nav-main-list {
         list-style-type: none;
         padding: 10px;
@@ -280,36 +322,72 @@ const nav = ref([
         flex-direction: column;
         justify-content: space-between;
         gap: 32px;
+
         .nav-bottom {
           margin-top: auto;
         }
+
         li {
           display: flex;
           flex-direction: column;
           gap: 8px;
+
           .nav-category {
             padding: 0 8px;
             color: var(--color-text-tertiary);
             font-size: 0.8rem;
           }
+
           .nav-items-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
           }
+
           .nav-item-wrapper {
-            width: 100%;
+            position: relative;
             display: flex;
-            justify-content: flex-start;
             align-items: center;
+
+            .vertical-progress-bar {
+              position: absolute;
+              left: 9px;
+              top: 20px;
+              height: 100%;
+              width: 2px;
+              background-color: var(--color-border);
+              border-radius: 4px;
+
+              .progress-bar {
+                height: 0%;
+                width: 2px;
+                background-color: var(--color-border);
+                border-radius: 4px;
+                transition: height 0.2s ease-out;
+                transition:
+                  height 0.2s ease-out,
+                  background-color 0.2s ease-out;
+
+                &.in-progress {
+                  height: 50%;
+                  background-color: var(--color-primary);
+                }
+
+                &.completed {
+                  height: 100%;
+                  background-color: var(--color-primary);
+                }
+              }
+            }
+
             a {
               width: 100%;
               display: flex;
               align-items: center;
             }
+
             .nav-link {
               display: flex;
               gap: 12px;
@@ -319,6 +397,7 @@ const nav = ref([
               transition: background-color 0.2s ease-out;
               padding: 10px 10px;
               border-radius: 10px;
+
               &:hover {
                 color: var(--color-text);
                 .icon {
@@ -326,14 +405,15 @@ const nav = ref([
                 }
                 cursor: pointer;
               }
-              &.router-link-active {
-                background-color: var(--color-selected);
+
+              &.router-link-exact-active {
                 color: var(--color-text);
                 .icon {
                   stroke: var(--color-text);
                 }
                 cursor: default;
               }
+
               .selection-dot-wrapper {
                 display: flex;
                 justify-content: center;
@@ -341,32 +421,25 @@ const nav = ref([
                 height: 20px;
                 width: 20px;
                 min-width: 20px;
-                aspect-ratio: 1/1;
                 border-radius: 50%;
                 background-color: transparent;
-                margin-right: 0;
                 border: 2px solid rgba(var(--color-primary-rgb), 0.3);
                 transition: border-color 0.2s;
                 position: relative;
 
-                &::before {
-                  content: '';
+                .selection-dot-outer {
                   position: absolute;
+                  top: 50%;
                   left: 50%;
-                  top: -20px;
-                  transform: translateX(-50%);
-                  width: 2px;
-                  height: 20px;
-                  background: rgba(var(--color-primary-rgb), 0.15);
+                  transform: translate(-50%, -50%);
+                  width: 28px;
+                  height: 28px;
+                  border-radius: 50%;
+                  background-color: rgba(var(--color-primary-rgb), 0.15);
                   z-index: 0;
-                }
-
-                &:first-child::before {
-                  display: none;
-                }
-
-                &:last-child::after {
-                  display: none;
+                  opacity: 0;
+                  transition: opacity 0.2s;
+                  pointer-events: none;
                 }
 
                 .selection-dot {
@@ -377,17 +450,29 @@ const nav = ref([
                   transition: background-color 0.2s;
                   z-index: 1;
                 }
+
                 &.selection-dot-wrapper--active {
                   border-color: var(--color-primary);
                   .selection-dot {
                     background-color: var(--color-primary);
                   }
+                  .selection-dot-outer {
+                    opacity: 1;
+                  }
                 }
               }
+
               .nav-item {
                 transition: color 0.2s ease-out;
                 padding: 2px 0 0 0;
                 font-size: 0.9rem;
+              }
+            }
+
+            &.completed .selection-dot-wrapper {
+              border-color: var(--color-primary);
+              .selection-dot {
+                background-color: var(--color-primary);
               }
             }
           }
