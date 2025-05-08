@@ -16,6 +16,7 @@ import Password from '@/views/password.vue'
 import PageTest from '@/views/PageTest.vue'
 import AddVideo from '@/views/AddVideo.vue'
 import Congrats from '@/views/Congrats.vue'
+import AddReview from '@/views/AddReview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -91,6 +92,11 @@ const router = createRouter({
       path: '/congrats',
       name: 'Congrats',
       component: Congrats,
+    },
+    {
+      path: '/add-review',
+      name: 'AddReview',
+      component: AddReview,
     },
   ],
 })

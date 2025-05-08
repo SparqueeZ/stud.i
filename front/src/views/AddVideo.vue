@@ -46,6 +46,7 @@ import Icon from '@/components/Icon.vue'
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
 }
 
 .popup-header {
