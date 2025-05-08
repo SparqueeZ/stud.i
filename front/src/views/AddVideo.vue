@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-container">
+  <div class="popup-container add-video-page">
     <div class="popup-box">
       <div class="popup-header">
         <Icon name="video" class="popup-icon" />
@@ -54,7 +54,7 @@ import Icon from '@/components/Icon.vue'
   margin-bottom: 20px;
 }
 
-.popup-icon {
+.add-video-page .popup-icon {
   stroke: var(--color-text);
   width: 24px;
   height: 24px;
@@ -90,7 +90,7 @@ h1 {
   align-items: center;
 }
 
-.upload-icon {
+.add-video-page .upload-icon {
   stroke: var(--color-text-tertiary);
   fill: none;
   width: 100px;
@@ -100,12 +100,9 @@ h1 {
   align-items: center;
   margin: 0 auto;
   transition: stroke 0.2s ease, scale 0.3s ease;
-  &:hover {
-    scale: 1.1;
-  }
 }
 
-.upload-icon:hover {
+.add-video-page .upload-icon:hover {
   stroke: #ffffff;
 }
 
@@ -147,7 +144,7 @@ h1 {
   color: #d9d9d9;
 }
 
-.back-icon {
+.add-video-page .back-icon {
   width: 20px;
   height: 20px;
   margin-right: 8px;

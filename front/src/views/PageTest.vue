@@ -1,6 +1,7 @@
 <template>
   <div class="test-page">
     <button @click="$router.push('/add-video')" class="test-button">Ouvrir la popup</button>
+    <button @click="$router.push('/congrats')" class="test-button">Ouvrir Félicitations</button>
   </div>
 </template>
 
