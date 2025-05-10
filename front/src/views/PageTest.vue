@@ -4,6 +4,9 @@
     <button @click="$router.push('/congrats')" class="test-button">Ouvrir Félicitations</button>
     <button @click="$router.push('/add-review')" class="test-button">Ouvrir Ajouter un avis</button>
     <button @click="$router.push('/add-module')" class="test-button">Ouvrir Ajouter un module</button>
+    <button @click="$router.push('/modify-module')" class="popup-button">
+      Modifier le module
+    </button>
     <AddReview v-if="showAddReview" @close="showAddReview = false" />
   </div>
 </template>
@@ -57,4 +60,20 @@ const showAddReview = ref(false)
   background-color: #b37400;
 }
 
+.popup-button {
+  padding: 14px;
+  background: #fca311;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #161618;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.popup-button:hover {
+  background-color: #b37400;
+}
 </style>

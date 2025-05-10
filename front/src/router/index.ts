@@ -18,6 +18,7 @@ import AddVideo from '@/views/AddVideo.vue'
 import Congrats from '@/views/Congrats.vue'
 import AddReview from '@/views/AddReview.vue'
 import AddModule from '@/views/AddModule.vue'
+import ModifyModule from '@/views/ModifyModule.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -103,6 +104,11 @@ const router = createRouter({
       path: '/add-module',
       name: 'AddModule',
       component: AddModule,
+    },
+    {
+      path: '/modify-module',
+      name: 'ModifyModule',
+      component: ModifyModule,
     },
   ],
 })
