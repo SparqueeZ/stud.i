@@ -21,6 +21,7 @@ import AddModule from '@/views/AddModule.vue'
 import ModifyModule from '@/views/ModifyModule.vue'
 import ContactSupport from '@/views/ContactSupport.vue'
 import ModifyVideo from '@/views/ModifyVideo.vue'
+import AddQuizz from '@/views/AddQuizz.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -121,6 +122,11 @@ const router = createRouter({
       path: '/modify-video',
       name: 'ModifyVideo',
       component: ModifyVideo,
+    },
+    {
+      path: '/add-quizz',
+      name: 'AddQuizz',
+      component: AddQuizz,
     },
   ],
 })

@@ -9,6 +9,7 @@
     </button>
     <button @click="$router.push('/contact-support')" class="test-button">Ouvrir Contacter le support</button>
     <button @click="$router.push('/modify-video')" class="test-button">Ouvrir Modifier les vidéos</button>
+    <button @click="$router.push('/add-quizz')" class="test-button">Ouvrir Ajouter un quiz</button>
     <AddReview v-if="showAddReview" @close="showAddReview = false" />
   </div>
 </template>
