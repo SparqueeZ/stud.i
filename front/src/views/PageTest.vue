@@ -7,6 +7,8 @@
     <button @click="$router.push('/modify-module')" class="popup-button">
       Modifier le module
     </button>
+    <button @click="$router.push('/contact-support')" class="test-button">Ouvrir Contacter le support</button>
+    <button @click="$router.push('/modify-video')" class="test-button">Ouvrir Modifier les vidéos</button>
     <AddReview v-if="showAddReview" @close="showAddReview = false" />
   </div>
 </template>

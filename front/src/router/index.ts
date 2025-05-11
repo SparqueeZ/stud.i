@@ -19,6 +19,8 @@ import Congrats from '@/views/Congrats.vue'
 import AddReview from '@/views/AddReview.vue'
 import AddModule from '@/views/AddModule.vue'
 import ModifyModule from '@/views/ModifyModule.vue'
+import ContactSupport from '@/views/ContactSupport.vue'
+import ModifyVideo from '@/views/ModifyVideo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -109,6 +111,16 @@ const router = createRouter({
       path: '/modify-module',
       name: 'ModifyModule',
       component: ModifyModule,
+    },
+    {
+      path: '/contact-support',
+      name: 'ContactSupport',
+      component: ContactSupport,
+    },
+    {
+      path: '/modify-video',
+      name: 'ModifyVideo',
+      component: ModifyVideo,
     },
   ],
 })
