@@ -31,8 +31,10 @@
         </div>
       </div>
       <div class="button-section">
-        <button class="submit-button">Modifier le module</button>
-        <button class="delete-button" @click="deleteModule">Supprimer le module</button>
+        <div class="button-wrapper">
+          <button class="submit-button">Modifier le module</button>
+          <button class="delete-button" @click="deleteModule">Supprimer le module</button>
+        </div>
       </div>
       <div class="back-link" @click="$router.push('/formation')">
         <Icon name="back" class="back-icon" />
@@ -188,10 +190,15 @@ h1 {
 
 .button-section {
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
-  gap: 20px;
   margin-bottom: 30px;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 20px; 
+  margin-left: 20px; 
 }
 
 .submit-button,
