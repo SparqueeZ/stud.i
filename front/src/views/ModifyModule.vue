@@ -67,12 +67,13 @@ const deleteModule = () => {
 .popup-box {
   width: 100%;
   max-width: 600px;
-  padding: 50px;
+  padding: 50px; 
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .popup-header {
@@ -116,11 +117,12 @@ h1 {
 .input-container,
 .textarea-container {
   position: relative;
+  max-width: 100%; 
 }
 
 .input-box,
 .textarea-box {
-  width: 100%;
+  width: calc(100% - 24px); 
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;

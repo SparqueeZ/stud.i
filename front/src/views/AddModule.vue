@@ -35,20 +35,23 @@ import Icon from '@/components/Icon.vue'
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
-  color: var(--color-text); /* S'assurer que la couleur de texte est appliquée */
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text); 
 }
 
 .popup-box {
   width: 100%;
-  max-width: 600px;
-  padding: 50px;
+  max-width: 600px; 
+  padding: 50px; 
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
+  overflow: hidden; 
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .popup-header {
@@ -58,7 +61,7 @@ import Icon from '@/components/Icon.vue'
 }
 
 .add-module-page .popup-icon {
-  stroke: var(--color-text); /* Utilisation de la variable CSS pour la couleur */
+  stroke: var(--color-text);
   width: 24px;
   height: 24px;
   margin-right: 12px;
@@ -75,7 +78,7 @@ h1 {
   border: none;
   height: 2px;
   background-color: #232325;
-  margin: 20px 0 20px; /* Réduction de l'espace sous la bordure */
+  margin: 20px 0 20px;
 }
 
 .form-section {
@@ -90,38 +93,38 @@ h1 {
 }
 
 .input-box {
-  width: 100%;
+  width: calc(100% - 24px); 
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
   background-color: #161618;
   color: #d9d9d9;
   font-size: 0.95rem;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .input-box::placeholder {
   color: #626164;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .textarea-box {
-  width: 100%;
-  height: 100px;
+  width: calc(100% - 24px); 
+  height: 100px; 
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
   background-color: #161618;
   color: #d9d9d9;
   font-size: 0.95rem;
-  resize: none;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
-  margin-bottom: 20px; /* Ajout d'espace sous la description */
+  resize: none; 
+  font-family: 'Poppins', sans-serif; 
+  margin-bottom: 20px; 
 }
 
 .textarea-box::placeholder {
   color: #626164;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .submit-button {
@@ -134,8 +137,8 @@ h1 {
   color: #161618;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 8px; /* Réduction de l'espace sous le bouton jaune */
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  margin-bottom: 8px; 
+  font-family: 'Poppins', sans-serif; 
 }
 
 .submit-button:hover {
@@ -151,7 +154,7 @@ h1 {
   font-size: 0.95rem;
   cursor: pointer;
   transition: color 0.2s ease;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .back-link:hover {

@@ -161,7 +161,7 @@ h1 {
 }
 
 .delete-button {
-  padding: 14px;
+  padding: 10px;
   background: #ff4d4f;
   border: none;
   border-radius: 8px;
@@ -177,7 +177,7 @@ h1 {
 }
 
 .add-button {
-  padding: 14px;
+  padding: 10px;
   background: #4caf50;
   border: none;
   border-radius: 8px;
@@ -193,7 +193,7 @@ h1 {
 }
 
 .submit-button {
-  padding: 14px;
+  padding: 10px;
   background: #fca311;
   border: none;
   border-radius: 8px;
@@ -236,5 +236,9 @@ h1 {
   color: #ffffff;
   font-size: 1rem;
   font-weight: bold;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
 }
 </style>

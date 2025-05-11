@@ -63,14 +63,15 @@ const selectStar = (n) => {
 
 .popup-box {
   width: 100%;
-  max-width: 600px;
-  padding: 50px;
+  max-width: 600px; 
+  padding: 50px; 
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
+  overflow: hidden; 
 }
 
 .popup-header {
@@ -144,7 +145,7 @@ h1 {
 }
 
 .message-box {
-  width: 100%;
+  width: calc(100% - 24px); 
   height: 100px;
   padding: 10px;
   border: 2px solid #232325;
@@ -153,17 +154,17 @@ h1 {
   color: #d9d9d9;
   font-size: 0.95rem;
   margin-bottom: 50px;
-  resize: none;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  resize: none; 
+  font-family: 'Poppins', sans-serif;
 }
 
 .message-box::placeholder {
   color: #626164;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .submit-button {
-  padding: 14px 20px; /* Augmentation de la largeur en ajoutant du padding horizontal */
+  padding: 14px 20px; 
   background: #fca311;
   border: none;
   border-radius: 8px;
@@ -173,7 +174,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-bottom: 1px;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .submit-button:hover {

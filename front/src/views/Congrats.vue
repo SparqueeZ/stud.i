@@ -80,7 +80,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 20px; /* Centrer horizontalement et ajouter un espace en bas */
+  margin: 0 auto 20px; 
 }
 
 .congrats-page .popup-icon {

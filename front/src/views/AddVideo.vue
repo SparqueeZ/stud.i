@@ -35,7 +35,7 @@ import Icon from '@/components/Icon.vue'
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .popup-box {
@@ -47,7 +47,7 @@ import Icon from '@/components/Icon.vue'
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .popup-header {
@@ -68,7 +68,7 @@ h1 {
   color: #d9d9d9;
   font-size: 1.5rem;
   font-weight: 700;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .separator {
@@ -113,7 +113,7 @@ h1 {
   color: #626164;
   font-size: 0.95rem;
   margin-bottom: 20px;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .upload-button {
@@ -127,7 +127,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-bottom: 30px;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .upload-button:hover {
@@ -143,7 +143,7 @@ h1 {
   font-size: 0.95rem;
   cursor: pointer;
   transition: color 0.2s ease;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif; 
 }
 
 .back-link:hover {

@@ -28,7 +28,7 @@ const showAddReview = ref(false)
   align-items: center;
   height: 100vh;
   background-color: #f5f5f5;
-  font-family: 'Poppins', sans-serif; /* Application de la police Poppins */
+  font-family: 'Poppins', sans-serif;
 }
 
 .test-button {
