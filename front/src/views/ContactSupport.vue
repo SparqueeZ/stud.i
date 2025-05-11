@@ -80,13 +80,13 @@ const email = ref('')
 .popup-box {
   width: 100%;
   max-width: 600px;
-  padding: 40px;
+  padding: 50px; /* Adjusted padding to match AddQuizz.vue */
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  font-family: 'Poppins', sans-serif;
+  overflow: hidden; /* Prevent overflow of content */
 }
 
 .popup-header {
@@ -137,6 +137,7 @@ h1 {
 .form-section {
   margin-bottom: 20px;
   text-align: left;
+  max-width: 100%; /* Ensure form sections do not exceed the box width */
 }
 
 .form-label {
@@ -147,7 +148,7 @@ h1 {
 }
 
 .textarea-box {
-  width: 100%;
+  width: calc(100% - 24px); /* Adjusted width to prevent overflow */
   height: 100px;
   padding: 10px;
   border: 2px solid #232325;
@@ -210,6 +211,8 @@ h1 {
 }
 
 .input-container {
+  position: relative;
+  max-width: 100%; /* Ensure input containers do not exceed the box width */
   display: flex;
   align-items: center;
   background: rgba(217, 217, 217, 0.03);
@@ -234,8 +237,8 @@ h1 {
 }
 
 .text-box input {
-  width: 100%;
-  padding: 10px 12px;
+  width: calc(100% - 24px); /* Adjusted width to prevent overflow */
+  padding: 10px;
   background: transparent;
   border: none;
   color: #d9d9d9;

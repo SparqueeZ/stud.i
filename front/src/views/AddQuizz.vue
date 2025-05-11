@@ -72,7 +72,7 @@ import Icon from '@/components/Icon.vue'
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  overflow: hidden; /* Prevent content from exceeding the box */
+  overflow: hidden;
 }
 
 .popup-header {
@@ -115,11 +115,11 @@ h1 {
 
 .input-container {
   position: relative;
-  max-width: 100%; /* Ensure container stays within bounds */
+  max-width: 100%;
 }
 
 .input-box {
-  width: calc(100% - 24px); /* Ensure padding doesn't cause overflow */
+  width: calc(100% - 24px);
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
@@ -144,8 +144,8 @@ h1 {
 
 .form-group-row {
   display: flex;
-  gap: 20px; /* Space between columns */
-  margin-bottom: 20px; /* Add vertical spacing between rows */
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group {
@@ -154,10 +154,10 @@ h1 {
 
 .button-section {
   display: flex;
-  justify-content: center; /* Center the buttons horizontally */
-  gap: 20px; /* Add space between the buttons */
+  justify-content: center;
+  gap: 20px;
   margin: 20px 0;
-  transform: translateX(-10px); /* Shift buttons slightly to the left */
+  transform: translateX(-10px);
 }
 
 .delete-button {
@@ -233,7 +233,7 @@ h1 {
 }
 
 .white-text {
-  color: #ffffff; /* Set text color to white */
+  color: #ffffff;
   font-size: 1rem;
   font-weight: bold;
 }
