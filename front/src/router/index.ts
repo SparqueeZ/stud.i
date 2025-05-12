@@ -14,6 +14,9 @@ import Course from '@/views/TrainingDashboard/Course.vue'
 import ModifyPassword from '@/views/modifypassword.vue'
 import Password from '@/views/password.vue'
 
+import UserDashboard from '@/layouts/UserDashboard.vue'
+import TEST from '@/views/UserDashboard/TEST.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -23,21 +26,29 @@ const router = createRouter({
       component: UserHome,
     },
     {
-      path: '/formation',
-      name: 'formation',
+      path: '/app',
+      name: 'app',
+      component: UserDashboard,
       children: [
         {
-          path: '',
-          name: 'formation-list',
-          component: Formation,
-        },
-        {
-          path: ':id',
-          name: 'formation-detail',
-          component: Course,
+          path: 'formation',
+          name: 'formation',
+          children: [
+            {
+              path: '',
+              name: 'formation-list',
+              component: Formation,
+            },
+            {
+              path: ':id',
+              name: 'formation-detail',
+              component: Course,
+            },
+          ],
         },
       ],
     },
+
     {
       path: '/certificat',
       name: 'certificat',

@@ -1,9 +1,9 @@
 <template>
-  <TrainingDashboard> super </TrainingDashboard>
+  <p>Super</p>
 </template>
 
 <script setup lang="ts">
-import TrainingDashboard from '@/layouts/TrainingDashboard.vue'
+import UserDashboard from '@/layouts/UserDashboard.vue'
 </script>
 
 <style scoped></style>
