@@ -381,7 +381,7 @@ const toggleSidebar = () => {
               margin: 0;
               display: flex;
               flex-direction: column;
-              gap: 32px;
+              gap: 24px;
 
               li {
                 display: flex;
@@ -468,7 +468,6 @@ const toggleSidebar = () => {
                 .module-progress-bar-wrapper {
                   display: flex;
                   flex-direction: row;
-                  align-items: center;
                   position: relative;
                 }
 
@@ -479,7 +478,8 @@ const toggleSidebar = () => {
                   margin-right: 12px;
                   position: absolute;
                   overflow: hidden;
-                  left: 9px;
+                  left: 9.1px;
+                  top: 18px;
                   height: calc(40px * var(--lesson-count, 1) - 35px);
                 }
 
@@ -583,7 +583,7 @@ const toggleSidebar = () => {
                       white-space: nowrap;
                       overflow: hidden;
                       text-overflow: ellipsis;
-                      max-width: 140px; // Limite la largeur pour l'ellipsis (ajustez selon la largeur de la sidebar)
+                      max-width: 140px;
                     }
                   }
 

@@ -58,6 +58,19 @@
                       <p class="nav-item" v-if="isOpen">{{ item.name }}</p>
                     </router-link>
                   </li>
+                  <li class="nav-item-wrapper quiz-item">
+                    <router-link :to="n.quiz.route" class="nav-link">
+                      <div
+                        class="quiz-icon-wrapper"
+                        :class="{
+                          'quiz-icon-wrapper--active': $route.path === n.quiz.route,
+                        }"
+                      >
+                        <Icon name="squareCheck" />
+                      </div>
+                      <p class="nav-item" v-if="isOpen">{{ n.quiz.name }}</p>
+                    </router-link>
+                  </li>
                 </ul>
               </div>
             </transition>
@@ -180,6 +193,11 @@ const courseNav = ref([
       },
       { name: 'Prêt ?', route: '/app/formation/12.4', icon: 'lesson', completed: false },
     ],
+    quiz: {
+      name: 'Quizz du module',
+      route: '/app/formation/12.quiz',
+      icon: 'quiz',
+    },
   },
   {
     chapterName: 'Module 2',
@@ -206,6 +224,11 @@ const courseNav = ref([
       },
       { name: 'Conclusion', route: '/app/formation/22.4', icon: 'lesson', completed: false },
     ],
+    quiz: {
+      name: 'Quizz du module',
+      route: '/app/formation/22.quiz',
+      icon: 'quiz',
+    },
   },
   {
     chapterName: 'Module 3',
@@ -227,6 +250,11 @@ const courseNav = ref([
       { name: 'Étude de cas', route: '/app/formation/32.3', icon: 'lesson', completed: false },
       { name: 'Certification', route: '/app/formation/32.4', icon: 'lesson', completed: false },
     ],
+    quiz: {
+      name: 'Quizz du module',
+      route: '/app/formation/32.quiz',
+      icon: 'quiz',
+    },
   },
   {
     chapterName: 'Module 4',
@@ -253,6 +281,11 @@ const courseNav = ref([
       },
       { name: 'Prochaines étapes', route: '/app/formation/42.4', icon: 'lesson', completed: false },
     ],
+    quiz: {
+      name: 'Quizz du module',
+      route: '/app/formation/42.quiz',
+      icon: 'quiz',
+    },
   },
 ])
 
@@ -302,11 +335,25 @@ const navSectionKey = computed(() => (isCourseNav.value ? 'course-nav' : 'basic-
 let accessibleItems: any[] = []
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .course-nav {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
+}
+
+.quiz-item {
+}
+.quiz-icon-wrapper {
+  padding: 0 0 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .icon {
+    width: 16px;
+    height: 16px;
+    stroke: var(--color-text-secondary);
+  }
 }
 </style>
