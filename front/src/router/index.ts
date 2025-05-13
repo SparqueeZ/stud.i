@@ -21,15 +21,20 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'accueil',
-      component: UserHome,
-    },
-    {
       path: '/app',
       name: 'app',
       component: UserDashboard,
       children: [
+        {
+          path: '/',
+          name: 'accueil',
+          component: UserHome,
+        },
+        {
+          path: '/certificat',
+          name: 'certificat',
+          component: Certificat,
+        },
         {
           path: 'formation',
           name: 'formation',
@@ -49,11 +54,6 @@ const router = createRouter({
       ],
     },
 
-    {
-      path: '/certificat',
-      name: 'certificat',
-      component: Certificat,
-    },
     {
       path: '/login',
       name: 'login',

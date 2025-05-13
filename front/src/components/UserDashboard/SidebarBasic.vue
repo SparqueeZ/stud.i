@@ -95,96 +95,6 @@ const nav = ref<Array<NavCategory>>([
       },
     ],
   },
-  {
-    position: 'bottom',
-    access: true,
-    items: [
-      {
-        name: 'Support',
-        icon: 'help',
-        route: '/support',
-        access: true,
-      },
-      {
-        name: 'Paramètres',
-        icon: 'settings',
-        route: '/parametres',
-        access: true,
-      },
-    ],
-  },
-])
-
-const courseNav = ref([
-  {
-    chapterName: 'Module 1',
-    locked: false,
-    position: 'top',
-    lessons: [
-      { name: "L'OSINT c'est quoi ?", route: '/formation/12.1', icon: 'lesson', completed: true },
-      { name: 'Un exemple connu', route: '/formation/12.2', icon: 'lesson', completed: true },
-      { name: 'Les aspects légaux', route: '/formation/12.3', icon: 'lesson', completed: false },
-      { name: 'Prêt ?', route: '/formation/12.4', icon: 'lesson', completed: false },
-    ],
-  },
-  {
-    chapterName: 'Module 2',
-    locked: false,
-    position: 'top',
-    lessons: [
-      {
-        name: 'Introduction à la cybersécurité',
-        route: '/formation/22.1',
-        icon: 'lesson',
-        completed: true,
-      },
-      { name: 'Les menaces courantes', route: '/formation/22.2', icon: 'lesson', completed: false },
-      { name: 'Les bonnes pratiques', route: '/formation/22.3', icon: 'lesson', completed: false },
-      { name: 'Conclusion', route: '/formation/22.4', icon: 'lesson', completed: false },
-    ],
-  },
-  {
-    chapterName: 'Module 3',
-    locked: true,
-    position: 'top',
-    lessons: [
-      {
-        name: 'Introduction au hacking éthique',
-        route: '/formation/32.1',
-        icon: 'lesson',
-        completed: false,
-      },
-      { name: 'Les outils de base', route: '/formation/32.2', icon: 'lesson', completed: false },
-      { name: 'Étude de cas', route: '/formation/32.3', icon: 'lesson', completed: false },
-      { name: 'Certification', route: '/formation/32.4', icon: 'lesson', completed: false },
-    ],
-  },
-  {
-    chapterName: 'Module 4',
-    locked: true,
-    position: 'bottom',
-    lessons: [
-      {
-        name: 'Introduction à la cryptographie',
-        route: '/formation/42.1',
-        icon: 'lesson',
-        completed: false,
-      },
-      {
-        name: 'Les algorithmes courants',
-        route: '/formation/42.2',
-        icon: 'lesson',
-        completed: false,
-      },
-      {
-        name: 'Applications pratiques',
-        route: '/formation/42.3',
-        icon: 'lesson',
-        completed: false,
-      },
-      { name: 'Prochaines étapes', route: '/formation/42.4', icon: 'lesson', completed: false },
-    ],
-  },
 ])
 
 const openModules = ref<boolean[]>([])
@@ -209,4 +119,11 @@ const navSectionKey = computed(() => (isCourseNav.value ? 'course-nav' : 'basic-
 let accessibleItems: any[] = []
 </script>
 
-<style scoped></style>
+<style scoped>
+.basic-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+</style>
