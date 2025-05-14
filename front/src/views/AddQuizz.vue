@@ -7,7 +7,7 @@
       </div>
       <hr class="separator" />
       <div class="form-section">
-        <p class="form-label white-text">Quiz existants</p>
+        <p class="form-label white-text">QCM existants</p>
         <div class="existing-quizzes">
           <div
             v-for="(quiz, qIdx) in quizzes"
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="form-section">
-        <p class="form-label white-text">Ajouter un Quiz</p>
+        <p class="form-label white-text">Ajouter un QCM</p>
         <input type="text" class="input-box" placeholder="Saisissez le titre du quiz ici" v-model="newQuizTitle" />
       </div>
       <div class="form-section">
