@@ -13,6 +13,15 @@ import Course from '@/views/TrainingDashboard/Course.vue'
 
 import ModifyPassword from '@/views/modifypassword.vue'
 import Password from '@/views/password.vue'
+import PageTest from '@/views/PageTest.vue'
+import AddVideo from '@/views/AddVideo.vue'
+import Congrats from '@/views/Congrats.vue'
+import AddReview from '@/views/AddReview.vue'
+import AddModule from '@/views/AddModule.vue'
+import ModifyModule from '@/views/ModifyModule.vue'
+import ContactSupport from '@/views/ContactSupport.vue'
+import ModifyVideo from '@/views/ModifyVideo.vue'
+import AddQuizz from '@/views/AddQuizz.vue'
 
 import UserDashboard from '@/layouts/UserDashboard.vue'
 import TEST from '@/views/UserDashboard/TEST.vue'
@@ -84,6 +93,51 @@ const router = createRouter({
       path: '/password',
       name: 'password',
       component: Password,
+    },
+    {
+      path: '/page-test',
+      name: 'PageTest',
+      component: PageTest,
+    },
+    {
+      path: '/add-video',
+      name: 'AddVideo',
+      component: AddVideo,
+    },
+    {
+      path: '/congrats',
+      name: 'Congrats',
+      component: Congrats,
+    },
+    {
+      path: '/add-review',
+      name: 'AddReview',
+      component: AddReview,
+    },
+    {
+      path: '/add-module',
+      name: 'AddModule',
+      component: AddModule,
+    },
+    {
+      path: '/modify-module',
+      name: 'ModifyModule',
+      component: ModifyModule,
+    },
+    {
+      path: '/contact-support',
+      name: 'ContactSupport',
+      component: ContactSupport,
+    },
+    {
+      path: '/modify-video',
+      name: 'ModifyVideo',
+      component: ModifyVideo,
+    },
+    {
+      path: '/add-quizz',
+      name: 'AddQuizz',
+      component: AddQuizz,
     },
   ],
 })
