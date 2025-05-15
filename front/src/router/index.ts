@@ -23,35 +23,46 @@ import ContactSupport from '@/views/ContactSupport.vue'
 import ModifyVideo from '@/views/ModifyVideo.vue'
 import AddQuizz from '@/views/AddQuizz.vue'
 
+import UserDashboard from '@/layouts/UserDashboard.vue'
+import TEST from '@/views/UserDashboard/TEST.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'accueil',
-      component: UserHome,
-    },
-    {
-      path: '/formation',
-      name: 'formation',
+      path: '/app',
+      name: 'app',
+      component: UserDashboard,
       children: [
         {
-          path: '',
-          name: 'formation-list',
-          component: Formation,
+          path: '/',
+          name: 'accueil',
+          component: UserHome,
         },
         {
-          path: ':id',
-          name: 'formation-detail',
-          component: Course,
+          path: '/certificat',
+          name: 'certificat',
+          component: Certificat,
+        },
+        {
+          path: 'formation',
+          name: 'formation',
+          children: [
+            {
+              path: '',
+              name: 'formation-list',
+              component: Formation,
+            },
+            {
+              path: ':id',
+              name: 'formation-detail',
+              component: Course,
+            },
+          ],
         },
       ],
     },
-    {
-      path: '/certificat',
-      name: 'certificat',
-      component: Certificat,
-    },
+
     {
       path: '/login',
       name: 'login',

@@ -1,51 +1,49 @@
 <template>
-  <UserDashboard>
-    <section class="content">
-      <section class="course-img-wrapper">
-        <div class="cta-button-wrapper" v-if="!userHasCourse">
+  <section class="content">
+    <section class="course-img-wrapper">
+      <div class="cta-button-wrapper" v-if="!userHasCourse">
+        <div class="cta-button">
+          <p class="cta-button-text">Rejoindre le cours</p>
+        </div>
+      </div>
+      <div class="cta-button-wrapper" v-else>
+        <router-link to="/app/formation/12">
           <div class="cta-button">
-            <p class="cta-button-text">Rejoindre le cours</p>
+            <p class="cta-button-text">Continuer</p>
           </div>
-        </div>
-        <div class="cta-button-wrapper" v-else>
-          <router-link to="/formation/12">
-            <div class="cta-button">
-              <p class="cta-button-text">Continuer</p>
-            </div>
-          </router-link>
-        </div>
-      </section>
-      <section class="course-title-wrapper">
-        <div class="course-infos-wrapper">
-          <h1 class="title">L'art de l'OSINT</h1>
-          <p class="description">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem Ipsum
-          </p>
-        </div>
-        <article class="course-trainer-infos-wrapper">
-          <header class="trainer-header">
-            <p class="title">Créateur</p>
-          </header>
-          <section class="trainer-infos">
-            <p class="trainer-name">Romain P.</p>
-            <p class="trainer-description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. J'adore
-              Parlons cyber c'est fou co...
-            </p>
-          </section>
-        </article>
-      </section>
-      <section class="course-ratings-wrapper">
-        <article class="rating" v-for="(r, index) in ratings" :key="index"></article>
-      </section>
+        </router-link>
+      </div>
     </section>
-  </UserDashboard>
+    <section class="course-title-wrapper">
+      <div class="course-infos-wrapper">
+        <h1 class="title">L'art de l'OSINT</h1>
+        <p class="description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+          a galley of type and scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting, remaining essentially
+          unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum
+        </p>
+      </div>
+      <article class="course-trainer-infos-wrapper">
+        <header class="trainer-header">
+          <p class="title">Créateur</p>
+        </header>
+        <section class="trainer-infos">
+          <p class="trainer-name">Romain P.</p>
+          <p class="trainer-description">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. J'adore
+            Parlons cyber c'est fou co...
+          </p>
+        </section>
+      </article>
+    </section>
+    <section class="course-ratings-wrapper">
+      <article class="rating" v-for="(r, index) in ratings" :key="index"></article>
+    </section>
+  </section>
 </template>
 
 <script setup lang="ts">

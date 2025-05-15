@@ -1,22 +1,19 @@
 <template>
-  <UserDashboard>
-    <section class="content">
-      <div class="left-collumn">
-        <FormationCard />
-        <ProgressionCard />
-      </div>
-      <div class="right-collumn">
-        <RessourcesCard />
-      </div>
-    </section>
-  </UserDashboard>
+  <section class="content">
+    <div class="left-collumn">
+      <FormationCard />
+      <ProgressionCard />
+    </div>
+    <div class="right-collumn">
+      <RessourcesCard />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
 import FormationCard from '@/components/UserDashboard/FormationCard.vue'
 import ProgressionCard from '@/components/UserDashboard/ProgressionCard.vue'
 import RessourcesCard from '@/components/UserDashboard/RessourcesCard.vue'
-import UserDashboard from '@/layouts/UserDashboard.vue'
 </script>
 
 <style scoped lang="scss">

@@ -4,6 +4,7 @@
     <div class="dashboard-content">
       <Header />
       <slot />
+      <router-view />
     </div>
   </main>
 </template>
@@ -21,7 +22,7 @@ import Header from '@/components/UserDashboard/Header.vue'
   max-height: calc(100svh - 20px);
   overflow: hidden;
   .sidebar-wrapper {
-    max-width: 240px;
+    max-width: 200px;
     max-height: calc(100vh - 20px);
   }
   .dashboard-content {
