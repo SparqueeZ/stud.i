@@ -23,7 +23,6 @@
         </ul>
       </nav>
     </section>
-    <!-- Nouveau conteneur flex pour le contenu principal -->
     <div class="sidebar-content">
       <section class="global-nav-wrapper">
         <transition name="slide-fade" mode="out-in">

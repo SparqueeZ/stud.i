@@ -36,5 +36,10 @@ a {
   --color-selected: #5e5e5e56;
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
 [data-theme='light'] {
 }

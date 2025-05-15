@@ -15,16 +15,17 @@ const iconHTML = computed(() => icons.find((icon) => icon.name === name)?.[name]
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px; /* Taille par défaut */
-  height: 100px; /* Taille par défaut */
-  stroke: #fca311; /* Couleur par défaut */
-  fill: none; /* Assurez-vous que l'intérieur des icônes est transparent */
-  transition: stroke 0.3s ease, width 0.3s ease, height 0.3s ease;
+  stroke: var(--color-text); /* Couleur par défaut */
+  fill: none;
+  transition:
+    stroke 0.3s ease,
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 .icon svg {
-  width: 100%;
-  height: 100%;
+  width: 24px;
+  height: 24px;
   stroke: inherit; /* Hérite de la couleur définie */
   fill: inherit; /* Hérite de la couleur définie */
 }
