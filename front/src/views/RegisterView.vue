@@ -80,7 +80,13 @@
             </div>
           </div>
         </div>
-        <button class="register-button" type="button">Inscription</button>
+        <button
+          class="register-button"
+          type="button"
+          @click="userStore.register(firstName, lastName, email, password)"
+        >
+          Inscription
+        </button>
         <p class="login-link">
           Vous avez déjà un compte ?
           <a href="#" @click.prevent="$router.push('/login')">Connectez-vous.</a>
@@ -95,7 +101,9 @@
 import { ref } from 'vue'
 import background from '@/assets/img/authentification_background.jpg'
 import Icon from '@/components/Icon.vue'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const firstName = ref('')
 const lastName = ref('')
 const email = ref('')

@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import axios from '@/assets/js/axios'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -12,5 +13,34 @@ export const useUserStore = defineStore('user', {
     },
   }),
   getters: {},
-  actions: {},
+  actions: {
+    async login(email: string, password: string) {
+      console.log('Login...')
+      try {
+        const response = await axios.post('/auth/login', {
+          email,
+          password,
+        })
+        console.log('Login response:', response)
+      } catch (error) {
+      } finally {
+        console.log('Login finished')
+      }
+    },
+    async register(firstname: string, lastname: string, email: string, password: string) {
+      console.log('Register...')
+      try {
+        const response = await axios.post('/auth/register', {
+          firstname,
+          lastname,
+          email,
+          password,
+        })
+        console.log('Register response:', response)
+      } catch (error) {
+      } finally {
+        console.log('Register finished')
+      }
+    },
+  },
 })

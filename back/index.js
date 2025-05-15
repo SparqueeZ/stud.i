@@ -17,7 +17,6 @@ const authRoutes = require("./routes/auth/auth.routes");
 
 const app = express();
 
-// Swagger configuration
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -33,14 +32,14 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routes/**/*.js"], // Chemin vers les fichiers de routes
+  apis: ["./routes/**/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const corsOptions = {
-  origin: "http://localhost",
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
