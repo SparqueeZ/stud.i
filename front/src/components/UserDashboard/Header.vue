@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '../Icon.vue'
+import Icon from '../lib/Icon.vue'
 import { useRoute } from 'vue-router'
 import { ref, computed } from 'vue'
 

@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 </script>
 
 <style scoped lang="scss">

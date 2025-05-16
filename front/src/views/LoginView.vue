@@ -58,7 +58,7 @@
 <script setup>
 import { ref } from 'vue'
 import background from '@/assets/img/authentification_background.jpg'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()

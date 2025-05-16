@@ -39,7 +39,10 @@
             />
           </div>
           <div class="eye-box" @click="toggleConfirmPassword">
-            <Icon :name="showConfirmPassword ? 'eyeclosed' : 'eyeopen'" class="toggle-password-icon" />
+            <Icon
+              :name="showConfirmPassword ? 'eyeclosed' : 'eyeopen'"
+              class="toggle-password-icon"
+            />
           </div>
         </div>
       </div>
@@ -54,7 +57,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 
 const newPassword = ref('')
 const confirmPassword = ref('')

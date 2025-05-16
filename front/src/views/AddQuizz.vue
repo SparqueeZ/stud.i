@@ -9,15 +9,15 @@
       <div class="form-section">
         <p class="form-label white-text">QCM existants</p>
         <div class="existing-quizzes">
-          <div
-            v-for="(quiz, qIdx) in quizzes"
-            :key="qIdx"
-            class="quiz-item"
-          >
+          <div v-for="(quiz, qIdx) in quizzes" :key="qIdx" class="quiz-item">
             <div class="quiz-title-row">
               <span class="quiz-title" @click="toggleQuiz(qIdx)">{{ quiz.title }}</span>
               <div class="quiz-title-actions">
-                <Icon :name="openedQuiz === qIdx ? 'down' : 'chevron'" class="input-icon" @click="toggleQuiz(qIdx)" />
+                <Icon
+                  :name="openedQuiz === qIdx ? 'down' : 'chevron'"
+                  class="input-icon"
+                  @click="toggleQuiz(qIdx)"
+                />
                 <button class="delete-quiz-btn" @click="deleteQuiz(qIdx)">Supprimer</button>
               </div>
             </div>
@@ -45,7 +45,11 @@
                   />
                   <span v-if="ans.correct" class="correct-badge">✔</span>
                   <div class="answer-actions">
-                    <Icon name="modify" class="modify-answer-icon" @click="startEdit(qIdx, aIdx, ans.text)" />
+                    <Icon
+                      name="modify"
+                      class="modify-answer-icon"
+                      @click="startEdit(qIdx, aIdx, ans.text)"
+                    />
                   </div>
                 </div>
               </div>
@@ -56,14 +60,15 @@
       </div>
       <div class="form-section">
         <p class="form-label white-text">Ajouter un QCM</p>
-        <input type="text" class="input-box" placeholder="Saisissez le titre du quiz ici" v-model="newQuizTitle" />
+        <input
+          type="text"
+          class="input-box"
+          placeholder="Saisissez le titre du quiz ici"
+          v-model="newQuizTitle"
+        />
       </div>
       <div class="form-section">
-        <div
-          v-for="(answer, idx) in answers"
-          :key="idx"
-          class="form-group-row"
-        >
+        <div v-for="(answer, idx) in answers" :key="idx" class="form-group-row">
           <div class="form-group answer-group">
             <input
               type="text"
@@ -71,16 +76,14 @@
               :placeholder="`Saisissez la réponse ${idx + 1}`"
               v-model="answer.text"
             />
-            <input
-              type="checkbox"
-              class="answer-checkbox"
-              v-model="answer.correct"
-            />
+            <input type="checkbox" class="answer-checkbox" v-model="answer.correct" />
           </div>
         </div>
       </div>
       <div class="button-section">
-        <button class="delete-button" @click="removeAnswer" :disabled="answers.length <= 2">Supprimer une réponse</button>
+        <button class="delete-button" @click="removeAnswer" :disabled="answers.length <= 2">
+          Supprimer une réponse
+        </button>
         <button class="add-button" @click="addAnswer">Ajouter une réponse</button>
       </div>
       <button class="submit-button" @click="addQuiz">Ajouter le Quiz</button>
@@ -94,7 +97,7 @@
 
 <script setup>
 import { ref, nextTick } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 
 const quizzes = ref([])
 const newQuizTitle = ref('')
@@ -151,7 +154,7 @@ function addQuiz() {
   if (!newQuizTitle.value.trim()) return
   quizzes.value.push({
     title: newQuizTitle.value,
-    answers: answers.value.map(a => ({ ...a })),
+    answers: answers.value.map((a) => ({ ...a })),
   })
   newQuizTitle.value = ''
   answers.value = [
@@ -437,7 +440,7 @@ h1 {
 }
 
 .quiz-answers {
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   padding: 8px 16px 12px 32px;
   display: flex;
   flex-direction: column;
@@ -465,10 +468,12 @@ h1 {
   padding: 8px 0 0 8px;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.2s;
 }
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
   max-height: 0;
   transform: translateY(-10px);
@@ -476,7 +481,9 @@ h1 {
 
 .fade-answers-enter-active,
 .fade-answers-leave-active {
-  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+  transition:
+    max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s;
   overflow: hidden;
 }
 .fade-answers-enter-from,

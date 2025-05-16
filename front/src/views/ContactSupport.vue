@@ -19,21 +19,11 @@
         <p class="form-label">Tu souhaites être recontacté ?</p>
         <div class="checkbox-group">
           <label>
-            <input
-              type="radio"
-              name="contact-preference"
-              value="oui"
-              v-model="contactPreference"
-            />
+            <input type="radio" name="contact-preference" value="oui" v-model="contactPreference" />
             Oui
           </label>
           <label>
-            <input
-              type="radio"
-              name="contact-preference"
-              value="non"
-              v-model="contactPreference"
-            />
+            <input type="radio" name="contact-preference" value="non" v-model="contactPreference" />
             Non
           </label>
         </div>
@@ -42,7 +32,7 @@
         <p class="form-label">Saisis ton adresse mail ici :</p>
         <div class="input-container">
           <div class="icon-box">
-            <Icon name="mail" class="input-icon" style="stroke: #373639;" />
+            <Icon name="mail" class="input-icon" style="stroke: #373639" />
           </div>
           <div class="text-box">
             <input type="email" v-model="email" placeholder="exemple@domaine.com" />
@@ -60,7 +50,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 
 const contactPreference = ref(null)
 const email = ref('')
@@ -194,7 +184,9 @@ h1 {
   border-radius: 50%;
   outline: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .checkbox-group input[type='radio']:checked {

@@ -9,8 +9,8 @@
         <h1 class="title">Félicitations !</h1>
       </div>
       <p class="popup-text">
-        Tu viens de terminer le module “Module 1 - Introduction” avec succès.
-        Continue ton apprentissage en passant au module suivant !
+        Tu viens de terminer le module “Module 1 - Introduction” avec succès. Continue ton
+        apprentissage en passant au module suivant !
       </p>
       <button class="continue-button">Continuer avec la prochaine vidéo</button>
       <div class="back-link" @click="$router.push('/formation')">
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import confetti from 'canvas-confetti'
 import { onMounted, ref } from 'vue'
 
@@ -35,7 +35,7 @@ onMounted(() => {
     myConfetti({
       particleCount: 175,
       spread: 80,
-      origin: { y: 0.6 }
+      origin: { y: 0.6 },
     })
   }
 })
@@ -80,7 +80,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 20px; 
+  margin: 0 auto 20px;
 }
 
 .congrats-page .popup-icon {

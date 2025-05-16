@@ -112,7 +112,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 import { useRoute } from 'vue-router'
 

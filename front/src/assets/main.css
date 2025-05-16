@@ -23,6 +23,10 @@ a {
   all: unset;
 }
 
+button {
+  cursor: pointer;
+}
+
 :root {
   --color-background: #161618;
   --color-border: #232325;

@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import Card from './Card.vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import { ref } from 'vue'
 
 const ressources = ref([

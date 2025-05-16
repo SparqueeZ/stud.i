@@ -7,13 +7,23 @@
       </div>
       <hr class="separator" />
       <p class="description">
-        Ton retour compte ! Dis-nous ce que tu as pensé de ce module pour aider les futurs apprenants et faire évoluer la formation.
+        Ton retour compte ! Dis-nous ce que tu as pensé de ce module pour aider les futurs
+        apprenants et faire évoluer la formation.
       </p>
       <div class="spacer"></div>
       <div class="rating-section">
         <p class="rating-text">Sélectionne ta note</p>
         <div class="stars">
-          <Icon name="star" v-for="n in 5" :key="n" class="star-icon" @mouseover="hoverStar(n)" @mouseleave="hoverStar(0)" @click="selectStar(n)" :class="{ active: n <= selectedStar || n <= hoveredStar }" />
+          <Icon
+            name="star"
+            v-for="n in 5"
+            :key="n"
+            class="star-icon"
+            @mouseover="hoverStar(n)"
+            @mouseleave="hoverStar(0)"
+            @click="selectStar(n)"
+            :class="{ active: n <= selectedStar || n <= hoveredStar }"
+          />
         </div>
       </div>
       <textarea class="message-box" placeholder="Ecris ton message ici"></textarea>
@@ -27,7 +37,7 @@
 </template>
 
 <script setup>
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import { ref } from 'vue'
 
 const selectedStar = ref(0)
@@ -63,15 +73,15 @@ const selectStar = (n) => {
 
 .popup-box {
   width: 100%;
-  max-width: 600px; 
-  padding: 50px; 
+  max-width: 600px;
+  padding: 50px;
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .popup-header {
@@ -136,7 +146,9 @@ h1 {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transition: stroke 0.2s ease, fill 0.2s ease;
+  transition:
+    stroke 0.2s ease,
+    fill 0.2s ease;
 }
 
 .star-icon.active {
@@ -145,7 +157,7 @@ h1 {
 }
 
 .message-box {
-  width: calc(100% - 24px); 
+  width: calc(100% - 24px);
   height: 100px;
   padding: 10px;
   border: 2px solid #232325;
@@ -154,17 +166,17 @@ h1 {
   color: #d9d9d9;
   font-size: 0.95rem;
   margin-bottom: 50px;
-  resize: none; 
+  resize: none;
   font-family: 'Poppins', sans-serif;
 }
 
 .message-box::placeholder {
   color: #626164;
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'Poppins', sans-serif;
 }
 
 .submit-button {
-  padding: 14px 20px; 
+  padding: 14px 20px;
   background: #fca311;
   border: none;
   border-radius: 8px;
@@ -174,7 +186,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-bottom: 1px;
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'Poppins', sans-serif;
 }
 
 .submit-button:hover {
