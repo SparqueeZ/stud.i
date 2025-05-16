@@ -30,6 +30,7 @@ import AddQuizz from '@/views/AddQuizz.vue'
 import UserDashboard from '@/layouts/UserDashboard.vue'
 import TEST from '@/views/UserDashboard/TEST.vue'
 import { useUserStore } from '@/stores/user'
+import { hasPermission } from '@/assets/js/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -124,11 +125,6 @@ const router = createRouter({
       name: 'Tableau de bord',
       component: TrainerHome,
     },
-    {
-      path: '/trainer/utilisateurs',
-      name: 'Utilisateurs',
-      component: TrainerUsers,
-    },
     { path: '/modifypassword', name: 'ModifyPassword', component: ModifyPassword },
     {
       path: '/password',
@@ -184,12 +180,17 @@ const router = createRouter({
 })
 
 // Guard: bloque l'accès à /app si aucun utilisateur n'est trouvé
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   // Vérifie si la route commence par /app
   if (to.path.startsWith('/app')) {
     // Si aucun utilisateur (id vide), redirige vers /login
     if (!userStore.user || !userStore.user.id) {
+      await userStore.getUserData()
+      if (userStore.user && userStore.user.id) {
+        return next()
+      }
+
       return next({ name: 'login' })
     }
   }
