@@ -47,5 +47,17 @@ export const useUserStore = defineStore('user', {
         console.log('Register finished')
       }
     },
+    async getUserData() {
+      this.loading = true
+      try {
+        const response = await axios.get('/user')
+        this.user = response.data
+        console.log('User data:', response)
+      } catch (error) {
+        console.error('Get user data error:', error)
+      } finally {
+        this.loading = false
+      }
+    },
   },
 })

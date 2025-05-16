@@ -8,6 +8,8 @@ const {
   Order,
   Payment,
 } = require("../../models");
+const adminUserController = require("../../controllers/admin/users.controller");
+const adminMiddleware = require("../../middleware/admin.middleware");
 
 /**
  * @swagger
@@ -231,31 +233,7 @@ router.get("/dashboard", async (req, res) => {
  *       500:
  *         description: Erreur serveur
  */
-router.get("/users", async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
-  const offset = (page - 1) * limit;
-
-  try {
-    const users = await User.findAndCountAll({
-      limit,
-      offset,
-      order: [["createdAt", "DESC"]],
-    });
-
-    res.json({
-      total: users.count,
-      pages: Math.ceil(users.count / limit),
-      currentPage: page,
-      users: users.rows,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Erreur lors de la récupération des utilisateurs",
-      error: error.message,
-    });
-  }
-});
+router.get("/users", adminMiddleware, adminUserController.getAllUsers);
 
 /**
  * @swagger

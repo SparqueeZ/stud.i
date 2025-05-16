@@ -130,7 +130,7 @@ exports.login = async (req, res) => {
     const userCourses = await user.getCourses();
 
     const token = user.generateAuthToken();
-    res.cookie("sessionToken", token, { httpOnly: false, secure: false });
+    res.cookie("token", token, { httpOnly: false, secure: false });
     res.status(200).json({
       message: "Connexion réussie",
       user: userData,

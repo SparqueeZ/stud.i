@@ -8,11 +8,11 @@
       </div>
       <div class="stat-card">
         <p class="stat-title">Actifs</p>
-        <p class="stat-value">{{ activeUsers }}</p>
+        <p class="stat-value">{{ 0 }}</p>
       </div>
       <div class="stat-card">
         <p class="stat-title">Ayant acheté la formation</p>
-        <p class="stat-value">{{ boughtUsers }}</p>
+        <p class="stat-value">{{ 0 }}</p>
       </div>
     </div>
 
@@ -38,10 +38,10 @@
               @click="openPopup(user)"
               style="cursor: pointer"
             >
-              <td>{{ user.lastName }}</td>
-              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastname }}</td>
+              <td>{{ user.firstname }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.signupDate }}</td>
+              <td>{{ user.createdAt }}</td>
               <td>
                 <ul>
                   <li v-for="course in user.courses" :key="course">{{ course }}</li>
@@ -69,65 +69,69 @@
 </template>
 
 <script setup lang="ts">
-import UserDashboard from '@/layouts/UserDashboard.vue'
 import Popup from '@/components/Popup.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useAdminStore } from '@/stores/admin'
 
-const users = ref([
-  {
-    id: 1,
-    firstName: 'Alice',
-    lastName: 'Martin',
-    email: 'alice.martin@email.com',
-    signupDate: '2023-01-15',
-    courses: ["L'Art de l'OSINT"],
-    active: true,
-    bought: true,
-  },
-  {
-    id: 2,
-    firstName: 'Bob',
-    lastName: 'Durand',
-    email: 'bob.durand@email.com',
-    signupDate: '2023-02-10',
-    courses: [],
-    active: false,
-    bought: false,
-  },
-  {
-    id: 3,
-    firstName: 'Chloé',
-    lastName: 'Petit',
-    email: 'chloe.petit@email.com',
-    signupDate: '2023-03-05',
-    courses: ["L'Art de l'OSINT"],
-    active: true,
-    bought: true,
-  },
-  {
-    id: 4,
-    firstName: 'David',
-    lastName: 'Lefevre',
-    email: 'david.lefevre@email.com',
-    signupDate: '2023-04-20',
-    courses: [],
-    active: false,
-    bought: false,
-  },
-  {
-    id: 5,
-    firstName: 'Emma',
-    lastName: 'Bernard',
-    email: 'emma.bernard@email.com',
-    signupDate: '2023-05-12',
-    courses: ["L'Art de l'OSINT"],
-    active: true,
-    bought: true,
-  },
-])
+const adminStore = useAdminStore()
 
-const activeUsers = computed(() => users.value.filter((u) => u.active).length)
-const boughtUsers = computed(() => users.value.filter((u) => u.bought).length)
+const users = computed(() => adminStore.users)
+
+// const users = ref([
+//   {
+//     id: 1,
+//     firstName: 'Alice',
+//     lastName: 'Martin',
+//     email: 'alice.martin@email.com',
+//     signupDate: '2023-01-15',
+//     courses: ["L'Art de l'OSINT"],
+//     active: true,
+//     bought: true,
+//   },
+//   {
+//     id: 2,
+//     firstName: 'Bob',
+//     lastName: 'Durand',
+//     email: 'bob.durand@email.com',
+//     signupDate: '2023-02-10',
+//     courses: [],
+//     active: false,
+//     bought: false,
+//   },
+//   {
+//     id: 3,
+//     firstName: 'Chloé',
+//     lastName: 'Petit',
+//     email: 'chloe.petit@email.com',
+//     signupDate: '2023-03-05',
+//     courses: ["L'Art de l'OSINT"],
+//     active: true,
+//     bought: true,
+//   },
+//   {
+//     id: 4,
+//     firstName: 'David',
+//     lastName: 'Lefevre',
+//     email: 'david.lefevre@email.com',
+//     signupDate: '2023-04-20',
+//     courses: [],
+//     active: false,
+//     bought: false,
+//   },
+//   {
+//     id: 5,
+//     firstName: 'Emma',
+//     lastName: 'Bernard',
+//     email: 'emma.bernard@email.com',
+//     signupDate: '2023-05-12',
+//     courses: ["L'Art de l'OSINT"],
+//     active: true,
+//     bought: true,
+//   },
+// ])
+
+// const activeUsers = computed(() => users.value.filter((u) => u.active).length)
+// const boughtUsers = computed(() => users.value.filter((u) => u.bought).length)
 
 const popupOpen = ref(false)
 const selectedUser = ref<any>(null)
@@ -136,6 +140,11 @@ function openPopup(user: any) {
   selectedUser.value = user
   popupOpen.value = true
 }
+
+onMounted(async () => {
+  await adminStore.getUsers(1, 10)
+  console.log('Users:', adminStore.users)
+})
 </script>
 
 <style scoped lang="scss">
