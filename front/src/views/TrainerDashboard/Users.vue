@@ -1,73 +1,71 @@
 <template>
-  <UserDashboard>
-    <section class="content">
-      <!-- Statistiques générales -->
-      <div class="stats-cards">
-        <div class="stat-card">
-          <p class="stat-title">Utilisateurs</p>
-          <p class="stat-value">{{ users.length }}</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-title">Actifs</p>
-          <p class="stat-value">{{ activeUsers }}</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-title">Ayant acheté la formation</p>
-          <p class="stat-value">{{ boughtUsers }}</p>
-        </div>
+  <section class="content">
+    <!-- Statistiques générales -->
+    <div class="stats-cards">
+      <div class="stat-card">
+        <p class="stat-title">Utilisateurs</p>
+        <p class="stat-value">{{ users.length }}</p>
       </div>
+      <div class="stat-card">
+        <p class="stat-title">Actifs</p>
+        <p class="stat-value">{{ activeUsers }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-title">Ayant acheté la formation</p>
+        <p class="stat-value">{{ boughtUsers }}</p>
+      </div>
+    </div>
 
-      <!-- Tableau des utilisateurs -->
-      <div class="users-table-card">
-        <h2>Liste des utilisateurs</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Date d'inscription</th>
-                <th>Formations achetées</th>
-                <th>Statut</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="user in users"
-                :key="user.id"
-                @click="openPopup(user)"
-                style="cursor: pointer"
-              >
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.signupDate }}</td>
-                <td>
-                  <ul>
-                    <li v-for="course in user.courses" :key="course">{{ course }}</li>
-                  </ul>
-                </td>
-                <td>
-                  <span
-                    :class="{
-                      'status-active': user.active,
-                      'status-inactive': !user.active,
-                    }"
-                  >
-                    {{ user.active ? 'Actif' : 'Inactif' }}
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- Tableau des utilisateurs -->
+    <div class="users-table-card">
+      <h2>Liste des utilisateurs</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Date d'inscription</th>
+              <th>Formations achetées</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="user in users"
+              :key="user.id"
+              @click="openPopup(user)"
+              style="cursor: pointer"
+            >
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.signupDate }}</td>
+              <td>
+                <ul>
+                  <li v-for="course in user.courses" :key="course">{{ course }}</li>
+                </ul>
+              </td>
+              <td>
+                <span
+                  :class="{
+                    'status-active': user.active,
+                    'status-inactive': !user.active,
+                  }"
+                >
+                  {{ user.active ? 'Actif' : 'Inactif' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <Popup v-model="popupOpen">
-        <div class="popup-test">Popup</div>
-      </Popup>
-    </section>
-  </UserDashboard>
+    </div>
+    <Popup v-model="popupOpen">
+      <div class="popup-test">Popup</div>
+    </Popup>
+  </section>
 </template>
 
 <script setup lang="ts">

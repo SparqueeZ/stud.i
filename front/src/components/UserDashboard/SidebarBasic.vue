@@ -72,7 +72,7 @@ const nav = ref<Array<NavCategory>>([
       {
         name: 'Certificat',
         icon: 'hat',
-        route: '/certificat',
+        route: '/app/certificat',
         access: true,
       },
     ],
@@ -84,13 +84,13 @@ const nav = ref<Array<NavCategory>>([
       {
         name: 'Gérer la formation',
         icon: 'settings',
-        route: '/trainer/formation',
+        route: '/app/trainer/formations',
         access: hasPermission(userStore.user, 'courses', 'update'),
       },
       {
         name: 'Gérer les utilisateurs',
         icon: 'user',
-        route: '/trainer/utilisateurs',
+        route: '/app/trainer/utilisateurs',
         access: hasPermission(userStore.user, 'users', 'view'),
       },
     ],

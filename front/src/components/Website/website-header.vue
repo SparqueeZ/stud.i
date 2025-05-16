@@ -86,7 +86,7 @@ const navs = ref([
 ])
 
 const navsBtn = ref([
-  { id: 0, name: 'Connexion', path: '/dashboard', button: true },
+  { id: 0, name: 'Connexion', path: '/login', button: true },
   { id: 1, name: 'Accéder à la formation', path: '/app', button: true },
 ])
 

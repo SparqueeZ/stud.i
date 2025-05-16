@@ -6,8 +6,10 @@
     </div>
     <div class="profile-wrapper">
       <div class="profile-infos-wrapper">
-        <p class="profile-infos">Baptiste D.</p>
-        <p class="profile-role">Invité</p>
+        <p class="profile-infos">
+          {{ userStore.user.firstname }} {{ userStore.user.lastname[0] }}.
+        </p>
+        <p class="profile-role">{{ userStore.user.role }}</p>
       </div>
       <div class="profile-picture-wrapper">
         <img src="../assets/img/profile_picture.png" alt="Profile Picture" />
@@ -20,7 +22,9 @@
 import Icon from '../lib/Icon.vue'
 import { useRoute } from 'vue-router'
 import { ref, computed } from 'vue'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const route = useRoute()
 const pageName = computed(() => route.name)
 

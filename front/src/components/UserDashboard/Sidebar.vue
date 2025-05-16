@@ -15,7 +15,7 @@
       <nav class="cta-nav">
         <ul class="cta-nav-list">
           <li class="cta-nav-item-wrapper">
-            <router-link to="/" class="cta-nav-link">
+            <router-link to="/app" class="cta-nav-link">
               <Icon name="home" />
               <p v-if="isOpen" class="cta-nav-item">Tableau de bord</p>
             </router-link>
@@ -33,13 +33,13 @@
     <footer class="sidebar-footer">
       <ul class="footer-nav-list">
         <li>
-          <router-link to="/support" class="footer-nav-link">
+          <router-link to="/app/support" class="footer-nav-link">
             <Icon name="help" />
             <span v-if="isOpen" class="footer-nav-item">Support</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/parametres" class="footer-nav-link">
+          <router-link to="/app/parametres" class="footer-nav-link">
             <Icon name="settings" />
             <span v-if="isOpen" class="footer-nav-item">Paramètres</span>
           </router-link>
@@ -203,7 +203,7 @@ const toggleSidebar = () => {
               }
               cursor: pointer;
             }
-            &.router-link-active {
+            &.router-link-exact-active {
               background-color: var(--color-selected);
               color: var(--color-text);
               .icon {
