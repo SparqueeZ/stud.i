@@ -15,12 +15,7 @@
             <Icon name="mail" class="input-icon" />
           </div>
           <div class="text-box">
-            <input
-              id="email"
-              type="email"
-              v-model="email"
-              placeholder="Adresse email"
-            />
+            <input id="email" type="email" v-model="email" placeholder="Adresse email" />
           </div>
         </div>
       </div>
@@ -35,7 +30,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import background from '@/assets/img/authentification_background.jpg'
 
 const email = ref('')

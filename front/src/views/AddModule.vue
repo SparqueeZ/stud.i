@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 </script>
 
 <style scoped lang="scss">
@@ -36,20 +36,20 @@ import Icon from '@/components/Icon.vue'
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   font-family: 'Poppins', sans-serif;
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .popup-box {
   width: 100%;
-  max-width: 600px; 
-  padding: 50px; 
+  max-width: 600px;
+  padding: 50px;
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
-  overflow: hidden; 
+  overflow: hidden;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -93,7 +93,7 @@ h1 {
 }
 
 .input-box {
-  width: calc(100% - 24px); 
+  width: calc(100% - 24px);
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
@@ -105,21 +105,21 @@ h1 {
 
 .input-box::placeholder {
   color: #626164;
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'Poppins', sans-serif;
 }
 
 .textarea-box {
-  width: calc(100% - 24px); 
-  height: 100px; 
+  width: calc(100% - 24px);
+  height: 100px;
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
   background-color: #161618;
   color: #d9d9d9;
   font-size: 0.95rem;
-  resize: none; 
-  font-family: 'Poppins', sans-serif; 
-  margin-bottom: 20px; 
+  resize: none;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
 }
 
 .textarea-box::placeholder {
@@ -137,8 +137,8 @@ h1 {
   color: #161618;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 8px; 
-  font-family: 'Poppins', sans-serif; 
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .submit-button:hover {

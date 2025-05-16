@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 import { useUserStore } from '@/stores/user'
 import { hasPermission } from '@/assets/js/auth'
@@ -72,7 +72,7 @@ const nav = ref<Array<NavCategory>>([
       {
         name: 'Certificat',
         icon: 'hat',
-        route: '/certificat',
+        route: '/app/certificat',
         access: true,
       },
     ],
@@ -84,13 +84,13 @@ const nav = ref<Array<NavCategory>>([
       {
         name: 'Gérer la formation',
         icon: 'settings',
-        route: '/trainer/formation',
+        route: '/app/trainer/formations',
         access: hasPermission(userStore.user, 'courses', 'update'),
       },
       {
         name: 'Gérer les utilisateurs',
         icon: 'user',
-        route: '/trainer/utilisateurs',
+        route: '/app/trainer/utilisateurs',
         access: hasPermission(userStore.user, 'users', 'view'),
       },
     ],

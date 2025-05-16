@@ -45,12 +45,12 @@
 </template>
 
 <script setup>
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 const deleteModule = () => {
   if (confirm('Êtes-vous sûr de vouloir supprimer ce module ?')) {
-    alert('Module supprimé avec succès.');
+    alert('Module supprimé avec succès.')
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -67,7 +67,7 @@ const deleteModule = () => {
 .popup-box {
   width: 100%;
   max-width: 600px;
-  padding: 50px; 
+  padding: 50px;
   background-color: #161618;
   border: 3px solid #232325;
   border-radius: 16px;
@@ -117,12 +117,12 @@ h1 {
 .input-container,
 .textarea-container {
   position: relative;
-  max-width: 100%; 
+  max-width: 100%;
 }
 
 .input-box,
 .textarea-box {
-  width: calc(100% - 24px); 
+  width: calc(100% - 24px);
   padding: 10px;
   border: 2px solid #232325;
   border-radius: 8px;
@@ -175,7 +175,9 @@ h1 {
   width: 48px;
   height: 48px;
   margin-bottom: 8px;
-  transition: stroke 0.2s ease, scale 0.3s ease;
+  transition:
+    stroke 0.2s ease,
+    scale 0.3s ease;
 }
 
 .action-icon:hover {
@@ -192,15 +194,15 @@ h1 {
 
 .button-section {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   margin-bottom: 30px;
 }
 
 .button-wrapper {
   display: flex;
-  gap: 20px; 
-  margin-left: 20px; 
+  gap: 20px;
+  margin-left: 20px;
 }
 
 .submit-button,

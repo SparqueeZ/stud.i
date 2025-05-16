@@ -1,9 +1,9 @@
 <template>
-  <UserDashboard> </UserDashboard>
+  <SoonPage />
 </template>
 
 <script setup lang="ts">
-import UserDashboard from '@/layouts/UserDashboard.vue'
+import SoonPage from '@/components/lib/SoonPage.vue'
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

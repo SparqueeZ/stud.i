@@ -51,7 +51,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import Icon from '@/components/lib/Icon.vue'
 
 const videos = ref([
   { id: 1, title: 'Introduction de la formation' },
@@ -154,7 +154,9 @@ h1 {
   border: 1px solid #232325;
   border-radius: 8px;
   padding: 8px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .video-item.dragging {
@@ -164,7 +166,9 @@ h1 {
 
 .video-transition-enter-active,
 .video-transition-leave-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .video-transition-enter-from,
@@ -222,7 +226,9 @@ h1 {
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
   font-family: 'Poppins', sans-serif;
 }
 

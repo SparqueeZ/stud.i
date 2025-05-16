@@ -5,63 +5,88 @@
       <div class="login-box">
         <h1>STUD.I</h1>
         <p class="subtitle">Visionner, apprendre, répondre</p>
-        <div class="form-group">
-          <label for="email">Adresse mail</label>
-          <div class="input-container">
-            <div class="icon-box">
-              <Icon name="mail" class="input-icon" />
-            </div>
-            <div class="text-box">
-              <input
-                id="email"
-                type="email"
-                v-model="email"
-                placeholder="bogoss.du974@hotmail.com"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <div class="input-container">
-            <div class="icon-box">
-              <Icon name="motdepasse" class="input-icon" />
-            </div>
-            <div class="text-box">
-              <input
-                id="password"
-                :type="showPassword ? 'text' : 'password'"
-                v-model="password"
-                placeholder="MotDeP@ss3DeF0u"
-              />
-            </div>
-            <div class="eye-box" @click="togglePassword">
-              <Icon :name="showPassword ? 'eyeclosed' : 'eyeopen'" class="toggle-password-icon" />
+        <form action="login" @submit.prevent="login">
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <div class="input-container">
+              <div class="icon-box">
+                <Icon name="mail" class="input-icon" />
+              </div>
+              <div class="text-box">
+                <input
+                  id="email"
+                  type="email"
+                  v-model="email"
+                  placeholder="bogoss.du974@hotmail.com"
+                  ref="emailInput"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <a href="#" class="forgot" @click.prevent="$router.push('/password')"
-          >Mot de passe oublié ?</a
-        >
-        <button class="login-button" type="button">Connexion</button>
-        <p class="signup-link">
-          Vous n'avez pas de compte ?
-          <a href="#" @click.prevent="$router.push('/register')">Inscrivez-vous.</a>
-        </p>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-container">
+              <div class="icon-box">
+                <Icon name="motdepasse" class="input-icon" />
+              </div>
+              <div class="text-box">
+                <input
+                  id="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  v-model="password"
+                  placeholder="MotDeP@ss3DeF0u"
+                />
+              </div>
+              <div class="eye-box" @click="togglePassword">
+                <Icon :name="showPassword ? 'eyeclosed' : 'eyeopen'" class="toggle-password-icon" />
+              </div>
+            </div>
+          </div>
+          <a href="#" class="forgot" @click.prevent="$router.push('/password')"
+            >Mot de passe oublié ?</a
+          >
+          <button class="login-button" type="submit">Connexion</button>
+          <p class="signup-link">
+            Vous n'avez pas de compte ?
+            <a href="#" @click.prevent="$router.push('/register')">Inscrivez-vous.</a>
+          </p>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import background from '@/assets/img/authentification_background.jpg'
-import Icon from '@/components/Icon.vue'
-import Input from '@/components/Input.vue' // Import du composant Input
+import Icon from '@/components/lib/Icon.vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
+
+// Ajout de la référence pour l'input email
+const emailInput = ref(null)
+
+onMounted(() => {
+  if (emailInput.value) {
+    emailInput.value.focus()
+  }
+})
+
+const login = async () => {
+  const isLoggedIn = await userStore.login(email.value, password.value)
+  console.log(isLoggedIn)
+  if (isLoggedIn === true) {
+    router.push('/app')
+  } else {
+  }
+}
 
 function togglePassword() {
   showPassword.value = !showPassword.value
