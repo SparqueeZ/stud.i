@@ -12,7 +12,13 @@
         <p class="profile-role">{{ userStore.user.role }}</p>
       </div>
       <div class="profile-picture-wrapper">
-        <img src="../assets/img/profile_picture.png" alt="Profile Picture" />
+        <p class="picture-letter">
+          {{ userStore.user.firstname[0] }}{{ userStore.user.lastname[0] }}
+        </p>
+        <!-- <img src="../assets/img/profile_picture.png" alt="Profile Picture" /> -->
+      </div>
+      <div class="profile-selector">
+        <Icon name="chevron" />
       </div>
     </div>
   </header>
@@ -75,18 +81,21 @@ const getPageIcon = () => {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-right: 2rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 2rem;
+
     .profile-infos-wrapper {
       display: flex;
       flex-direction: column;
       align-items: end;
       .profile-infos {
-        font-size: 20px;
+        font-size: 1rem;
         color: var(--color-text);
         text-transform: capitalize;
       }
       .profile-role {
-        font-size: 16px;
+        font-size: 0.8rem;
         color: var(--color-text-secondary);
         text-transform: capitalize;
       }
@@ -94,11 +103,34 @@ const getPageIcon = () => {
     .profile-picture-wrapper {
       width: 40px;
       height: 40px;
-      border-radius: 10px;
+      border-radius: 5px;
       overflow: hidden;
-      background-color: var(--color-text-secondary);
+      background-color: var(--color-text-tertiary);
       img {
         font-size: 10px;
+      }
+      .picture-letter {
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--color-text);
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .profile-selector {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+      .icon {
+        rotate: 270deg;
       }
     }
   }

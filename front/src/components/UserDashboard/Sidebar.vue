@@ -625,6 +625,7 @@ const toggleSidebar = () => {
           transition:
             background-color 0.2s,
             color 0.2s;
+          cursor: pointer;
           &:hover {
             background-color: var(--color-selected);
             color: var(--color-text);
